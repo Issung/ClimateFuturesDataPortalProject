@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
-        <title>$Title$</title>
+        <title>Welcome to the climate futures data portal!</title>
     </head>
     <body>
         <%
