@@ -5,6 +5,7 @@
     </head>
     <body>
         <p>long here!!!!</p>
+        <p>kim</p>
         <%
             for(int i = 0; i < 4; i++)
             {
