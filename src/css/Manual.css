@@ -29,8 +29,8 @@ body {
 #content {
     background-color: white;
     border-radius: 5px;
-    height: 100%;
     padding: 15px;
+    overflow: auto;
 }
 
 #data-portal-button {
@@ -59,10 +59,25 @@ body {
     min-width:333px;
 }
 
+#middle{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 80%;
+}
+
 #navigation {
     background-color:white; 
     border-radius:5px; 
-    height:80%; 
+
     padding-top: 12px; 
     font-size:20px;
+    overflow: auto;
+}
+
+/*Media Queries*/
+@media screen and (max-width: 1300px) {
+    .tagline{
+        display: none;
+    }
 }

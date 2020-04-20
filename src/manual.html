@@ -20,10 +20,10 @@
                     </main>
                 </div>
             </div>
-            <div class="row content-stretcher-content" id="middle">
-                <div class="col-md-3 content-stretcher" style="background-color: #2C3E50; padding:15px;">
+            <div class="row content-stretcher-content bg-dark-blue" id="middle">
+                <div class="col-md-3 content-stretcher" style=" padding:15px;">
                     <h2 class="header" style="color: white">Climate Futures Data Portal User Manual</h2>
-                    <div class="content-stretcher-content" id="navigation">
+                    <div class="content-stretcher-content " id="navigation">
                         <ul>
                             <li><a href="#">Introduction</a></li>
                             <li><a href="#">Interface</a></li>
@@ -38,19 +38,30 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-9 bg-dark-blue" style="padding: 15px;">
+                <div class="col-md-8" id="content" style="margin: 15px">
 
                     <!-- TODO: Find a way to make the contents of this div not expand it, and instead create a scroll bar for it. -->
-                    <div id="content">
-                        Write Content Here.
-                    </div>
+
+                    Write Content Here.
+
                 </div>
             </div>
-            <div class="row content-stretcher-footer bg-dark-blue">
+            <div class="row content-stretcher-footer bg-dark-blue" >
                 <a href="#" id="data-portal-button">
                     Go To Data Portal
                 </a>
             </div>
         </div>
     </body>
+
+    <script>
+        $(document).ready(function() {
+            /*test code*/
+            for (var a=1;a<100;a++){
+                $("<p>asdasdasdasdasd\n</p>").appendTo("#content");
+            }
+
+        })
+
+    </script>
 </html>
