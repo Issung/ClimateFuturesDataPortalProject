@@ -55,7 +55,11 @@ body {
     color:#889;
     font: normal 100 20px sans-serif;
     margin-top: 51px;
+<<<<<<< Updated upstream
     margin-left:30px;
+=======
+    margin-left:150px;
+>>>>>>> Stashed changes
     min-width:333px;
 }
 
@@ -76,7 +80,12 @@ body {
 }
 
 /*Media Queries*/
+<<<<<<< Updated upstream
 @media screen and (max-width: 1300px) {
+=======
+
+@media screen and (max-width: 1000px) {
+>>>>>>> Stashed changes
     .tagline{
         display: none;
     }
