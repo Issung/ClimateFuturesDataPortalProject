@@ -17,10 +17,10 @@
         <p>Climate science for Australia's future</p>
     </header>
 
-    <div class="container-fluid mainpannel">
-        <div class="row flex-xl-nowrap roundgap">
-            <div class="col-3">
+    <div class="roundgap" id="MainPannel_Manual">
 
+
+            <div id="NavPart">
                 <div id="SubTitle">
                     <t1>
                         Climate Futures
@@ -44,69 +44,15 @@
                                 <a class="subpages" href="#">Knowing the user interface</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <a class="subpages" href="#">Knowing the user interface</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="subpages" href="#">Knowing the user interface</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="subpages" href="#">Knowing the user interface</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="subpages" href="#">Knowing the user interface</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="subpages" href="#">Knowing the user interface</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="subpages" href="#">Knowing the user interface</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="subpages" href="#">Knowing the user interface</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="subpages" href="#">Knowing the user interface</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="subpages" href="#">Knowing the user interface</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="subpages" href="#">Knowing the user interface</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a class="subpages" href="#">Knowing the user interface</a>
-                            </td>
-                        </tr>
+
                     </table>
                 </div>
 
             </div>
-            <div class="col-8 roundgap" id="TextArea">
+            <div class="roundgap" id="TextArea">
 
             </div>
-        </div>
+
     </div>
 
     <footer>
@@ -122,7 +68,19 @@
             $(".subpages").removeClass("active");
             $(this).addClass("active");
         })
+
+
+        /*test code*/
+        for (var a=1;a<100;a++){
+            $("<tr>\n" +
+                "                            <td>\n" +
+                "                                <a class=\"subpages\" href=\"#\">Knowing the user interface</a>\n" +
+                "                            </td>\n" +
+                "                        </tr>").appendTo("#NavList table");
+        }
+
     })
+
 </script>
 
 </html>
