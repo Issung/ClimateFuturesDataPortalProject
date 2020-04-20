@@ -1,145 +1,68 @@
-html,body{
+html,
+body {
     height: 100%;
+    margin: 0
+}
+
+/*  These content-stretcher classes is used to stretch an inner content class to fill the remaining vertical space. 
+    Credit goes to: https://stackoverflow.com/a/24979148/8306962 */
+.content-stretcher {
     display: flex;
-    flex-direction: column;
+    flex-flow: column;
+    height: 100%;
 }
 
-footer{
-    background:#2b3d51;
-    flex-grow: 1;
+.content-stretcher .content-stretcher-header {
+    flex: 0 1 auto;
 }
 
-
-header{
-    margin-top: 15px;
-    margin-bottom: 0px;
-    width: 100%;
-    display: flex;
-    height: 10%;
+.content-stretcher .content-stretcher-content {
+    flex: 1 1 auto; 
 }
 
-header p{
-    font-family: Arial;
-    font-weight: bold;
-    font-size: xx-large;
-    color: #a2a2b0;
-    margin-bottom: 0px;
-    right: 20px;
-    line-height: 75px;
-    margin-left: 30%;
+.content-stretcher .content-stretcher-footer {
+    flex: 0 1 40px;
 }
 
-table tr th{
-    font-family: Arial;
-    font-weight: bold;
-    font-size: 25px;
-    color:#214961;
-    padding-bottom: 20px;
+/*  End content-stretcher classes. */
+
+#content {
+    background-color: white;
+    border-radius: 5px;
+    height: 100%;
+    padding: 15px;
 }
 
-t1{
-    font-family: Roboto;
-    font-size: 40px;
-    font-weight: bold;
+#data-portal-button {
     color: white;
-    white-space: nowrap;
+    background: #C86442;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    left: 0px;
+    margin-bottom: 13px;
+    padding: 5px 18px 5px 10px;
 }
 
-/*Class*/
-
-.active{
-    color: #214961;
-    font-weight: bold;
+.bg-dark-blue {
+    background-color: #2C3E50;
 }
 
-.roundgap{
-    padding: 20px 20px 20px 20px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+.bg-white {
+    background-color: white;
 }
 
-.subpages{
-    font-family: Arial;
-    font-size: 25px;
-    text-decoration: underline;
-    color: #385c71 ;
-    white-space: nowrap;
+.tagline {
+    color:#889;
+    font: normal 100 20px sans-serif;
+    margin-top: 51px;
+    margin-left:30px;
+    min-width:333px;
 }
 
-/*ID*/
-
-#Logo{
-    width: 500px;
-    height: 75px;
-    min-width: 500px;
-    min-height: 75px;
-    margin-left: 5%;
-}
-
-#Logo img{
-    max-width: 100%;
-    max-height: 100%;
-}
-
-#MainPannel_Manual{
-     background-color: #728b9a;
-     height: 80%;
- }
-
-#PButton{
-    margin-top: 30px;
-    font-family: Arial;
-    font-size: 30px;
-    border-style:none;
-    color: white;
-    background: url("") no-repeat;
-}
-
-#SubTitle{
-    margin-left: 5%;
-    position: relative;
-}
-
-#TextArea{
-    border-radius: 15px;
-    margin: 40px 10% 20px 10%;
-    background: white;
-    overflow: auto;
-    width: 80%;
-
-}
-
-#NavPart{
-    display: flex;
-    flex-direction: column;
-}
-
-#NavList{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    overflow: auto;
-
-}
-
-/*Media query*/
-@media screen and (max-width: 1800px) {
-    header p{
-        margin-left: 20%;
-    }
-}
-
-@media screen and (max-width: 1570px) {
-    header p{
-        margin-left: 10%;
-    }
-}
-
-@media screen and (max-width: 1380px) {
-    header p{
-        display: none;
-    }
+#navigation {
+    background-color:white; 
+    border-radius:5px; 
+    height:80%; 
+    padding-top: 12px; 
+    font-size:20px;
 }
