@@ -1,0 +1,120 @@
+html,body{
+    height: 100%;
+    position: relative;
+}
+
+footer{
+    background:#2b3d51;
+    height: 12%;
+}
+
+
+header{
+    margin-top: 15px;
+    margin-bottom: 0px;
+    min-width: 900px;
+    display: flex;
+    height: 8%;
+}
+
+header p{
+    font-family: Arial;
+    font-weight: bold;
+    font-size: xx-large;
+    color: #a2a2b0;
+    margin-bottom: 0px;
+    right: 20px;
+    line-height: 75px;
+    white-space: nowrap;
+    position: absolute;
+}
+
+table tr th{
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 25px;
+    color:#214961;
+    padding-bottom: 20px;
+}
+
+t1{
+    font-family: Roboto;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+}
+
+/*Class*/
+
+.active{
+    color: #214961;
+    font-weight: bold;
+}
+
+.mainpannel{
+    background-color: #728b9a;
+    height: 80%;
+}
+
+.roundgap{
+    padding: 20px 20px 20px 20px;
+}
+
+.subpages{
+    font-family: Arial;
+    font-size: 25px;
+    text-decoration: underline;
+    color: #385c71 ;
+}
+
+/*ID*/
+
+#Logo{
+    width: 500px;
+    height: 75px;
+    min-width: 500px;
+    min-height: 47px;
+    margin-left: 10%;
+    display: inline;
+
+}
+
+#Logo img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#PButton{
+    margin-top: 30px;
+    font-family: Arial;
+    font-size: 30px;
+    border-style:none;
+    color: white;
+    background: url("") no-repeat;
+}
+
+#SubTitle{
+    margin-left: 5%;
+    position: relative;
+}
+
+#TextArea{
+    border-radius: 15px;
+    margin: 40px 0px 20px 60px;
+    background: white;
+    overflow: auto;
+    height: 600px;
+
+}
+
+#NavList{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: white;
+    padding: 20px;
+    height: 500px;
+    border-radius: 15px;
+    overflow: auto;
+
+}
