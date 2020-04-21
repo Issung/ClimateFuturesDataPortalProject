@@ -1,0 +1,163 @@
+#steps {
+    background-color: #1C5A75;
+    min-height: 50px;
+    line-height: 45px;
+}
+
+.step {
+    text-align: center;
+    -webkit-box-shadow: inset 63px 10px 41px -74px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 63px 10px 41px -74px rgba(0,0,0,0.75);
+    box-shadow: inset 63px 10px 41px -74px rgba(0,0,0,0.75);
+    color: white;
+    font-size: 20px;
+}
+
+.step:hover {
+    color: white;
+}
+
+#steps .step:not(:last-child).selected {
+    background-color: #65b5d0;
+}
+
+#steps .step:not(:last-child) {
+    background-color: #4787A2;
+}
+
+/* Steps small screen top to bottom layout. */
+@media only screen and (max-width: 767px) {
+    #steps .step {
+        -webkit-box-shadow: inset 0px 163px 58px -200px rgba(0,0,0,0.75);
+        -moz-box-shadow: inset 0px 163px 58px -200px rgba(0,0,0,0.75);
+        box-shadow: inset 0px 163px 58px -200px rgba(0,0,0,0.75);
+        /* border-top: 1px solid white; */
+    }
+
+    #steps .step:nth-child(1) {
+        z-index: 4;
+    }
+    
+    #steps .step:nth-child(2) {
+        z-index: 3;
+    }
+    
+    #steps .step:nth-child(3) {
+        z-index: 2;
+    }
+    
+    /* User Manual */
+    #steps .step:nth-child(4) {
+        z-index: 1;
+        width: 100%;
+        background-color: #1C5A75;
+    }
+}
+
+/* Steps big screen left to right layout. */
+@media only screen and (min-width: 768px) {
+    #steps .step:not(:last-child) {
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+
+    #steps .step:nth-child(1) {
+        z-index: 4;
+    }
+    
+    #steps .step:nth-child(2) {
+        z-index: 3;
+        left: -18px;
+    }
+    
+    #steps .step:nth-child(3) {
+        z-index: 2;
+        left: -36px;
+    }
+    
+    /* User Manual */
+    #steps .step:nth-child(4) {
+        z-index: 1;
+        left: -54px;
+        width: 100%;
+        background-color: #1C5A75;
+        padding-left: 70px;
+    }
+}
+
+#options {
+    padding: 20px;
+    background-color: #3E4E60;
+    -webkit-box-shadow: inset -1px 190px 38px -200px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset -1px 190px 38px -200px rgba(0,0,0,0.75);
+    box-shadow: inset -1px 190px 38px -200px rgba(0,0,0,0.75);
+}
+
+#options .box {
+    color: white;
+    padding: 15px 20px 15px 20px;
+    background-color: #C86442;
+    border-radius: 5px;
+    margin-right: 25px;
+    -webkit-box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
+}
+
+#options .box * {
+    padding-bottom: 5px;
+    width: 100%;
+    border-radius:5px;
+}
+
+#content {
+    background-color: white;
+}
+
+.side-button-left {
+    border-top-right-radius: 25px; 
+    border-bottom-right-radius: 25px;
+    right: 0px;
+    left: -20px;
+    padding: 10px;
+    text-align: center;
+    top: -30px;
+    -webkit-box-shadow: -5px 5px 13px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: -5px 5px 13px -5px rgba(0,0,0,0.75);
+    box-shadow: -5px 5px 13px -5px rgba(0,0,0,0.75);
+}
+
+#options .side-button-right {
+    right: -20px;
+}
+
+.side-button-right {
+    border-top-left-radius: 25px; 
+    border-bottom-left-radius: 25px;
+    right: 0px;
+    margin-left: auto;
+    padding: 10px;
+    text-align: center;
+    top: -30px;
+    -webkit-box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
+}
+
+.orange {
+    background-color:#C86442; 
+    color: white;
+}
+
+.orange:hover {
+    color: white;
+}
+
+.blue {
+    background-color: #4787A2;
+    color:white;
+}
+
+.blue:hover {
+    color: white;
+}
