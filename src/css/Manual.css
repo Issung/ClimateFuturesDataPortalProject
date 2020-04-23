@@ -4,6 +4,7 @@ body {
     margin: 0
 }
 
+
 /*  These content-stretcher classes is used to stretch an inner content class to fill the remaining vertical space. 
     Credit goes to: https://stackoverflow.com/a/24979148/8306962 */
 .content-stretcher {

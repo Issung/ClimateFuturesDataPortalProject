@@ -111,6 +111,10 @@
     box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
 }
 
+#options-container .options .box h3{
+    color:#3e4e60;
+}
+
 #options-container .options .box * {
     padding-bottom: 5px;
     width: 100%;
@@ -177,6 +181,10 @@
 
 .blue:hover {
     color: white;
+}
+
+.gap{
+    padding: 20px;
 }
 
 input[type=date] {
