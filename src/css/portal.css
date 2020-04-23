@@ -85,7 +85,7 @@
     }
 }
 
-#options {
+#options-container {
     padding: 20px;
     background-color: #3E4E60;
     -webkit-box-shadow: inset -1px 190px 38px -200px rgba(0,0,0,0.75);
@@ -93,7 +93,14 @@
     box-shadow: inset -1px 190px 38px -200px rgba(0,0,0,0.75);
 }
 
-#options .box {
+#options-container .options {
+    width: 100%;
+    height: 100%;
+    margin-left: 0px;
+}
+
+#options-container .options .box {
+    height: 100%;
     color: white;
     padding: 15px 20px 15px 20px;
     background-color: #C86442;
@@ -104,14 +111,24 @@
     box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
 }
 
-#options .box * {
+#options-container .options .box * {
     padding-bottom: 5px;
     width: 100%;
     border-radius:5px;
 }
 
-#content {
+#options-container .options .box input,
+#options-container .options .box select {
+    height: 35px;
+}
+
+#content-container {
     background-color: white;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
 }
 
 .side-button-left {
@@ -127,7 +144,7 @@
     box-shadow: -5px 5px 13px -5px rgba(0,0,0,0.75);
 }
 
-#options .side-button-right {
+#options-container .options .side-button-right {
     right: -20px;
 }
 
@@ -160,4 +177,20 @@
 
 .blue:hover {
     color: white;
+}
+
+input[type=date] {
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+input[type=date]::-webkit-clear-button {
+    display: none; /* Hide the button */
+    -webkit-appearance: none; /* turn off default browser styling */
 }

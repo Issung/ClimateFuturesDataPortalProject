@@ -8,13 +8,37 @@
         <link rel="stylesheet" href="css/bootstrap-grid.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+        <!-- Map Imports -->
+            <!-- Import ArcGIS Map CSS -->
+            <link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css" />
+
+            <!-- Import ArcGIS 4.15 Library. -->
+            <script src="https://js.arcgis.com/4.15/"></script>
+
+            <!-- Import Custom Map Setup Javascript. -->
+            <script src="components/map.js"></script>
+        <!-- End Map Imports -->
+
         <script>
             $(document).ready(function() {
+                $('#step2-options').hide();
+                $('#step3-options').hide();
+
+                $('#step2-content').hide();
+                $('#step3-content').hide();
+
                 $('.step').click(function () {
                     $('.step').removeClass('selected');
                     $(this).addClass('selected');
 
                     //TODO: Change the content displayed depending on which step was selected.
+                    var id = $(this)[0].id;
+
+                    $('.options').hide();
+                    $('.content').hide();
+
+                    $('#' + id + '-options').show();
+                    $('#' + id + '-content').show();
                 });
             });
         </script>
@@ -34,28 +58,56 @@
                 </div>
             </div>
             <div class="row" id="steps">
-                <a href="#" class="col-sm-12 col-md-3 step">Select Area</a>
-                <a href="#" class="col-sm-12 col-md-3 step">Select Time and Variables</a>
-                <a href="#" class="col-sm-12 col-md-3 step">Summary & Download</a>
-                <a href="manual.html" target="_blank" class="col-sm-12 col-md-3 step">📖 User Manual</a>
+                <a href="#" class="col-sm-12 col-md-3 step selected" id="step1">Area</a>
+                <a href="#" class="col-sm-12 col-md-3 step" id="step2">Time and Variables</a>
+                <a href="#" class="col-sm-12 col-md-3 step" id="step3">Download</a>
+                <a href="manual.html" target="_blank" class="col-sm-12 col-md-3 step">📖 Manual</a>
             </div>
-            <div class="row" id="options">
-                <div class="col-2 box align-self-start">
-                    <h4>Example Box 1</h4>
-                    <select>
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                    </select>
+            <div class="row" id="options-container">
+                <div class="row options" id="step1-options">
+                    <div class="col-2 box align-self-start">
+                        <h4>Example Box 1</h4>
+                        <select>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </div>
+                    <div class="col-3 box align-self-start">
+                        <h4>Example Box 2</h4>
+                        <input type="date" name="birthday" value="2020-12-31">
+                    </div>
+                    <a href="#" class="col-2 align-self-end side-button-right align-self-end orange">Test Right Button</a>
                 </div>
-                <div class="col-3 box align-self-start">
-                    <h4>Example Box 2</h4>
-                    <h6>Lorem Ipsum</h6>
+                <div class="row options" id="step2-options">
+                    <div class="col-2 box align-self-start">
+                        <h4>This Is Step 2</h4>
+                        <h6>Hello!</h6>
+                    </div>
+                    <a href="#" class="col-2 align-self-end side-button-right align-self-end orange">Test Right Button</a>
                 </div>
+                <div class="row options" id="step3-options">
+                    <div class="col-2 box align-self-start">
+                        <h4>This Is Step 3</h4>
+                        <h6>Hello!</h6>
+                    </div>
+                    <a href="#" class="col-2 align-self-end side-button-right align-self-end orange">This Is Step 3</a>
+                </div>
+            </div>
+            <div class="row content-stretcher-content" id="content-container">
+                <div class="content" id="step1-content" style="position: relative;">
+                    <!-- Map Content -->
+                    <!-- Div to hold map. -->
+                    <div id="mapDiv" style="padding: 0; margin: 0; height: 100%; width: 100%;"></div>
 
-                <a href="#" class="col-2 align-self-end side-button-right align-self-end orange">Test Right Button</a>
-            </div>
-            <div class="row content-stretcher-content" id="content">
-                <!-- Content goes here -->
+                    <!-- Element to display mouse coordinates. -->
+                    <p id="info" style="position:absolute; padding:2px 6px 2px 6px; background-color: #00000061; color:white; top:15px; right:15px;"></p>
+                </div>
+                <div class="content" id="step2-content">
+                    <h3>Variables Content Goes Here</h3>
+                </div>
+                <div class="content" id="step3-content">
+                    <h3>Summary & Download Content Goes Here</h3>
+                </div>
             </div>
             <div class="row content-stretcher-footer bg-dark-blue" style="min-height: 100px !important;">
                 <a href="#" class="col-2 align-self-end side-button-left align-self-end blue">Test Left Button</a>
