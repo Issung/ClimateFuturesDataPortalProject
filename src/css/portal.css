@@ -206,7 +206,7 @@ input[type=date]::-webkit-clear-button {
 
 /*change triangle to calendar logo*/
 input[type="date"]::-webkit-calendar-picker-indicator {
-    background: url("../img/calendar-logo.png") no-repeat;
+    background: url("../img/calendar-icon.png") no-repeat;
     background-size: 100% 100%;
     width: 14px;
     height: 18px;
@@ -221,6 +221,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-radius: 5px;
     margin-left: 12%;
     padding: 0;
+    height: 35px;
 }
 
 .search-txt{
@@ -234,8 +235,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     float: right;
     height: 20px;
     width: 20px;
-    background:url("../img/search-logo.png");
+    background:url("../img/search-icon.png");
     background-size: 100% 100%;
     margin-top: 3px;
+}
+
+#step2-options >div div{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0 !important;
 }
 
