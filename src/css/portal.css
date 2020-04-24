@@ -191,6 +191,7 @@ input[type=date] {
     padding-top: 2px;
     padding-left: 5px;
     padding-right: 5px;
+    color:#3e4d60;
 }
 
 input[type=date]::-webkit-inner-spin-button {
@@ -202,3 +203,39 @@ input[type=date]::-webkit-clear-button {
     display: none; /* Hide the button */
     -webkit-appearance: none; /* turn off default browser styling */
 }
+
+/*change triangle to calendar logo*/
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: url("../img/calendar-logo.png") no-repeat;
+    background-size: 100% 100%;
+    width: 14px;
+    height: 18px;
+    cursor: pointer;
+    margin-left: .5rem;
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+}
+
+.search-box{
+    background: white;
+    border-radius: 5px;
+    margin-left: 12%;
+    padding: 0;
+}
+
+.search-txt{
+    border: none;
+    outline: none;
+    background: none;
+    float: left;
+}
+
+.search-btn{
+    float: right;
+    height: 20px;
+    width: 20px;
+    background:url("../img/search-logo.png");
+    background-size: 100% 100%;
+    margin-top: 3px;
+}
+
