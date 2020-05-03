@@ -204,7 +204,7 @@ input[type=date]::-webkit-clear-button {
     -webkit-appearance: none; /* turn off default browser styling */
 }
 
-/*change triangle to calendar logo*/
+/*change triangle to calendar icon*/
 input[type="date"]::-webkit-calendar-picker-indicator {
     background: url("../img/calendar-icon.png") no-repeat;
     background-size: 100% 100%;
@@ -245,4 +245,39 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-bottom: 0;
     padding-bottom: 0 !important;
 }
+
+.variable-list{
+    display: flex;
+}
+
+.variable-list>div{
+    margin: 5px 10px 5px 10px;
+}
+
+.variable-list div label{
+    margin: 0 0 0 0;
+    color:#244b63;
+    font-size: 20px;
+    vertical-align: center;
+}
+
+/*checkbox: uncheck*/
+.variable-list div input[type="checkbox"]{
+    width: 30px;
+    height: 30px;
+    -webkit-appearance: none;/*turn off default appearance*/
+    outline: none;
+    border: solid 2px #244b63;
+    border-radius: 100%;
+    vertical-align: bottom;
+}
+
+/*checkbox:check*/
+.variable-list div input[type="checkbox"]:checked{
+    background: url("../img/checkbox-icon.png") no-repeat;
+    background-size: 100% 100%;
+    border: none;
+}
+
+
 
