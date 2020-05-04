@@ -21,115 +21,89 @@
         <!-- End Map Imports -->
 
         <script>
+            const FIRST_STEP = 1;
+            const LAST_STEP = 3;
+
+            var currentStep = 1;
+
             $(document).ready(function() {
 
-                var option;//current option part
-                var content;//current content part
-
+                //Webpage starts on step 1 so hide step 2 and 3 and other irrelevant controls.
                 $('#step2-options').hide();
                 $('#step3-options').hide();
 
                 $('#step2-content').hide();
                 $('#step3-content').hide();
 
-                /*Init option as current option of shown page*/
-                $('#options-container>div').each(function () {
-                    if(($(this).css('display'))!='none'){
-                        option=$(this);
-                    }
-                })
-                /*Init content as current content of shown page*/
-                $('#content-container>div').each(function () {
-                    if(($(this).css('display'))!='none'){
-                        content=$(this);
-                    }
-                })
+                $('#previous-step-button').hide();
+                $('#download-button').hide();
 
+                //User clicks a step.
                 $('.step').click(function () {
-                    $('.step').removeClass('selected');
-                    $(this).addClass('selected');
-
-                    //TODO: Change the content displayed depending on which step was selected.
+                    //Get step number and select that step.
                     var id = $(this)[0].id;
+                    currentStep = parseInt(id.charAt(id.length - 1));
 
-                    if(id.length>0) {
-                        $('.options').hide();
-                        $('.content').hide();
-
-                        $('#' + id + '-options').show();
-                        $('#' + id + '-content').show();
-
-                        /*Refreash option and content after user switch by click navigation bar*/
-                        option=$('#' + id + '-options');
-                        content=$('#' + id + '-content');
-                    }
+                    selectStep(currentStep);
                 });
 
-                /*Buttons part functions*/
-                $(function () {
-                    /*Init the view of buttons part when load the page in first time*/
-                    $('#left-btn').hide();
-                    $('#download-btn').hide();
-                    $('#right-btn').text('Next Step');
-                    $('#left-btn').text('Previous Step');
+                //User clicks "Previous Step" button.
+                $('#previous-step-button').click(function() {
+                    currentStep--;
+                    selectStep(currentStep);
+                });
 
-                    /*Previous switch*/
-                    $('#right-btn').click(function () {
-                        option.hide();
-                        content.hide();
-                        content=content.next();
-                        option=option.next();
-                        option.show();
-                        content.show();
-                    })
+                //User clicks "Next Step" button.
+                $('#next-step-button').click(function() {
+                    currentStep++;
+                    selectStep(currentStep);
+                });
 
-                    /*Next switch*/
-                    $('#left-btn').click(function () {
-                        option.hide();
-                        content.hide();
-                        content=content.prev();
-                        option=option.prev();
-                        option.show();
-                        content.show();
-                    })
+                //Variables quick sort filter 
+                $(".search-txt").keyup(function () {
+                    var value = $(this).val().toLowerCase();
 
-                    /*Buttons layout of three pages*/
-                    $('.switch-btn').click(function () {
-                        switch (option[0].id) {
-                            case 'step1-options':
-                                $('#left-btn').hide();
-                                $('#right-btn').show();
-                                $('#download-btn').hide();
-                                break;
-                            case 'step2-options':
-                                $('#left-btn').show();
-                                $('#right-btn').show();
-                                $('#download-btn').hide();
-                                break;
-                            case 'step3-options':
-                                $('#left-btn').show();
-                                $('#right-btn').hide();
-                                $('#download-btn').show();
-                                break;
+                    $('.variable-list div').each(function () {
+                        $(this).hide();
+
+                        if ($(this).text().toLowerCase().indexOf($.trim(value)) >= 0) {
+                            $(this).show();
                         }
                     })
-                })
-
-                /*Quick sort filter*/
-                $(function () {
-                    $(".search-txt").keyup(function () {
-                        var value = $(this).val().toLowerCase();
-
-                        $('.variable-list div').each(function () {
-                                $(this).hide();
-
-                                if ($(this).text().toLowerCase().indexOf($.trim(value)) >= 0) {
-                                    $(this).show();
-                                }
-                        })
-                    });
                 });
             });
+
+            function selectStep(stepInt) {
+                if (stepInt >= FIRST_STEP && stepInt <= LAST_STEP) {
+                    //Highlight selected step.
+                    $('.step').removeClass('selected');
+                    $('#step' + stepInt).addClass('selected');
+
+                    //Hide all options and content.
+                    $('.options').hide();
+                    $('.content').hide();
+
+                    //Show the selected options and content.
+                    $('#step' + stepInt + '-options').show();
+                    $('#step' + stepInt + '-content').show();
+
+                    //Show/Hide "Previous Step" button.
+                    if (stepInt == FIRST_STEP) 
+                        $('#previous-step-button').hide();
+                    else
+                        $('#previous-step-button').show();
+
+                    //Show/Hide "Next Step" and "Download" buttons.
+                    if (stepInt == LAST_STEP) {
+                        $('#next-step-button').hide();
+                        $('#download-button').show();
+                    }
+                    else {
+                        $('#next-step-button').show();
+                        $('#download-button').hide();
+                    }
+                }
+            }
         </script>
     </head>
     <body>
@@ -165,7 +139,7 @@
                         <h4>Example Box 2</h4>
                         <input type="date" name="birthday" value="2020-12-31">
                     </div>
-                    <a href="#" class="col-2 align-self-end side-button-right align-self-end orange">Test Right Button</a>
+                    <a href="#" class="col-2 align-self-end side-button-right align-self-end orange">Import Shapefile</a>
                 </div>
                 <div class="row options" id="step2-options">
                     <div class="col-5 box align-self-start" >
@@ -218,7 +192,7 @@
                     <div id="mapDiv" style="padding: 0; margin: 0; height: 100%; width: 100%;"></div>
 
                     <!-- Element to display mouse coordinates. -->
-                    <p id="info" style="position:absolute; padding:2px 6px 2px 6px; background-color: #00000061; color:white; top:15px; right:15px;"></p>
+                    <p id="info" style="position:absolute; padding:2px 6px 2px 6px; background-color: #00000061; color:white; bottom:15px; right:15px;"></p>
                 </div>
                 <div class="content gap" id="step2-content">
                     <form class="variable-list">
@@ -247,9 +221,9 @@
                 </div>
             </div>
             <div class="row content-stretcher-footer bg-dark-blue" style="min-height: 100px !important;">
-                <a href="#" id="left-btn" class="col-2 align-self-end side-button-left align-self-end blue switch-btn">Test Left Button</a>
-                <a href="#" id="right-btn" class="col-2 align-self-end side-button-right align-self-end blue switch-btn">Test Right Button</a>
-                <a href="#" id="download-btn" class="col-2 align-self-end side-button-right align-self-end blue switch-btn">Download</a>
+                <a href="#" id="previous-step-button" class="col-2 align-self-end side-button-left align-self-end blue">Previous Step</a>
+                <a href="#" id="next-step-button" class="col-2 align-self-end side-button-right align-self-end blue">Next Step</a>
+                <a href="#" id="download-button" class="col-2 align-self-end side-button-right align-self-end blue switch-btn">Download</a>
             </div>
         </div>
     </body>

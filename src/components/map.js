@@ -1,11 +1,17 @@
 require([
     "esri/Map", 
     "esri/views/MapView",
+    "dojo/dom",
     "esri/geometry/support/webMercatorUtils",
-    "dojo/dom"
-], function(Map, MapView, webMercatorUtils, dom) {
+    "esri/widgets/Sketch",
+    "esri/layers/GraphicsLayer"
+], function(Map, MapView, dom, webMercatorUtils, Sketch, GraphicsLayer) {
+    const layer = new GraphicsLayer();
+
+    // More basemaps here: https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
     var map = new Map({
-        basemap: "satellite" // More here: https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
+        basemap: "satellite",
+        layers: [layer]
     });
 
     var view = new MapView({
@@ -15,8 +21,21 @@ require([
         center: [146.4, -41.7] // longitude, latitude
     });
 
+    const sketch = new Sketch({
+        layer: layer,
+        view: view,
+        creationMode: "update",
+        availableCreateTools: ["rectangle"],
+        defaultUpdateOptions: {
+            enableRotation: false,
+            toggleToolOnClick: false
+        }
+    });
+
+    view.ui.add(sketch, "top-right");
+
     //https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html
-    view.on("click", function(event) {
+    /*view.on("click", function(event) {
         // Override default popup for our custom popup.
         view.popup.autoOpenEnabled = false;
 
@@ -28,7 +47,7 @@ require([
             location: event.mapPoint,
             content: "This is a point of interest"
         });
-    });
+    });*/
     
     //https://community.esri.com/thread/213365-show-coordinates-wont-work-in-4x
     view.on("pointer-move", showCoordinates);

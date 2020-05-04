@@ -279,6 +279,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: none;
 }
 
+#mapDiv button[title="Reshape"] {
+    display: none;
+}
+
 #book-icon{
     width: 25px;
     height: 25px;
