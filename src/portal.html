@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="css/manual.css">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/bootstrap-grid.css">
+        <script src="https://kit.fontawesome.com/1ada55961c.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <!-- Map Imports -->
@@ -21,11 +22,28 @@
 
         <script>
             $(document).ready(function() {
+
+                var option;//current option part
+                var content;//current content part
+
                 $('#step2-options').hide();
                 $('#step3-options').hide();
 
                 $('#step2-content').hide();
                 $('#step3-content').hide();
+
+                /*Init option as current option of shown page*/
+                $('#options-container>div').each(function () {
+                    if(($(this).css('display'))!='none'){
+                        option=$(this);
+                    }
+                })
+                /*Init content as current content of shown page*/
+                $('#content-container>div').each(function () {
+                    if(($(this).css('display'))!='none'){
+                        content=$(this);
+                    }
+                })
 
                 $('.step').click(function () {
                     $('.step').removeClass('selected');
@@ -40,7 +58,76 @@
 
                         $('#' + id + '-options').show();
                         $('#' + id + '-content').show();
+
+                        /*Refreash option and content after user switch by click navigation bar*/
+                        option=$('#' + id + '-options');
+                        content=$('#' + id + '-content');
                     }
+                });
+
+                /*Buttons part functions*/
+                $(function () {
+                    /*Init the view of buttons part when load the page in first time*/
+                    $('#left-btn').hide();
+                    $('#download-btn').hide();
+                    $('#right-btn').text('Next Step');
+                    $('#left-btn').text('Previous Step');
+
+                    /*Previous switch*/
+                    $('#right-btn').click(function () {
+                        option.hide();
+                        content.hide();
+                        content=content.next();
+                        option=option.next();
+                        option.show();
+                        content.show();
+                    })
+
+                    /*Next switch*/
+                    $('#left-btn').click(function () {
+                        option.hide();
+                        content.hide();
+                        content=content.prev();
+                        option=option.prev();
+                        option.show();
+                        content.show();
+                    })
+
+                    /*Buttons layout of three pages*/
+                    $('.switch-btn').click(function () {
+                        switch (option[0].id) {
+                            case 'step1-options':
+                                $('#left-btn').hide();
+                                $('#right-btn').show();
+                                $('#download-btn').hide();
+                                break;
+                            case 'step2-options':
+                                $('#left-btn').show();
+                                $('#right-btn').show();
+                                $('#download-btn').hide();
+                                break;
+                            case 'step3-options':
+                                $('#left-btn').show();
+                                $('#right-btn').hide();
+                                $('#download-btn').show();
+                                break;
+                        }
+                    })
+                })
+
+                /*Quick sort filter*/
+                $(function () {
+                    $(".search-txt").keyup(function () {
+                        var value = $(this).val().toLowerCase();
+
+                        $('.variable-list div').each(function () {
+                                $(this).hide();
+
+                                if ($(this).text().toLowerCase().indexOf($.trim(value)) >= 0) {
+                                    $(this).show();
+                                }
+                        })
+                    });
                 });
             });
         </script>
@@ -60,10 +147,10 @@
                 </div>
             </div>
             <div class="row" id="steps">
-                <a href="#" class="col-sm-12 col-md-3 step selected" id="step1">Area</a>
-                <a href="#" class="col-sm-12 col-md-3 step" id="step2">Time and Variables</a>
-                <a href="#" class="col-sm-12 col-md-3 step" id="step3">Download</a>
-                <a href="manual.html" target="_blank" class="col-sm-12 col-md-3 step">📖 Manual</a>
+                <a href="#" class="col-sm-12 col-md-3 step selected switch-btn" id="step1">Area</a>
+                <a href="#" class="col-sm-12 col-md-3 step switch-btn" id="step2">Time and Variables</a>
+                <a href="#" class="col-sm-12 col-md-3 step switch-btn" id="step3">Download</a>
+                <a href="manual.html" target="_blank" class="col-sm-12 col-md-3 step"><i class="fas fa-book" style="margin-right: 10px"></i>Manual</a>
             </div>
             <div class="row" id="options-container">
                 <div class="row options" id="step1-options">
@@ -160,8 +247,9 @@
                 </div>
             </div>
             <div class="row content-stretcher-footer bg-dark-blue" style="min-height: 100px !important;">
-                <a href="#" class="col-2 align-self-end side-button-left align-self-end blue">Test Left Button</a>
-                <a href="#" class="col-2 align-self-end side-button-right align-self-end blue">Test Right Button</a>
+                <a href="#" id="left-btn" class="col-2 align-self-end side-button-left align-self-end blue switch-btn">Test Left Button</a>
+                <a href="#" id="right-btn" class="col-2 align-self-end side-button-right align-self-end blue switch-btn">Test Right Button</a>
+                <a href="#" id="download-btn" class="col-2 align-self-end side-button-right align-self-end blue switch-btn">Download</a>
             </div>
         </div>
     </body>
