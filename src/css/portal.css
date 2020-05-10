@@ -263,8 +263,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /*checkbox: uncheck*/
 .variable-list div input[type="checkbox"]{
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     -webkit-appearance: none;/*turn off default appearance*/
     outline: none;
     border: solid 2px #244b63;
