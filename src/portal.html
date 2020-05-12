@@ -21,6 +21,7 @@
         <!-- End Map Imports -->
 
         <script>
+            const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             const FIRST_STEP = 1;
             const LAST_STEP = 3;
 
@@ -71,10 +72,31 @@
                         }
                     })
                 });
+
+                $('#download-button').click(function() {
+                    //This will eventually download data from backend code but for now it generates an example file and opens a save dialog.
+                    var filename = "ExampleClimateDataFile.nc";
+                    var text = "Data goes here.";
+
+                    var element = document.createElement('a');
+                    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+                    element.setAttribute('download', filename);
+
+                    element.style.display = 'none';
+                    document.body.appendChild(element);
+
+                    element.click();
+
+                    document.body.removeChild(element);
+                });
             });
 
             function selectStep(stepInt) {
                 if (stepInt >= FIRST_STEP && stepInt <= LAST_STEP) {
+                    if (stepInt == LAST_STEP) {
+                        updateSummaryPage();
+                    }
+                    
                     //Highlight selected step.
                     $('.step').removeClass('selected');
                     $('#step' + stepInt).addClass('selected');
@@ -103,6 +125,87 @@
                         $('#download-button').hide();
                     }
                 }
+            }
+
+            /* Update all fields on the summary page. */
+            function updateSummaryPage() {
+                updateSummaryPageEstimatedSize();
+                updateSummaryPageLocation();
+                updateSummaryPageTimePeriod();
+                updateSummaryPageVariables();
+            }
+
+            /* Update the "Estimate Subset Size" field of the summary page. */
+            function updateSummaryPageEstimatedSize() {
+                //TODO.
+                $('.summary-item#extract-size').text('500Mb (WIP)');
+            }
+
+            /* Update the "Selected Location/Area" field of the summary page. */
+            function updateSummaryPageLocation() {
+                //TODO.
+                $('.summary-item#selected-area').text('Rectangle, 52.3ha (WIP)');
+            }
+
+            /* Update the "Selected Time Period" field of the summary page. */
+            function updateSummaryPageTimePeriod() {
+                var startDate = new Date($('input#start-date').val());
+                var endDate = new Date($('input#end-date').val());
+
+                if (isNaN(startDate)) {
+                    $('.summary-item#start-date').addClass('error');
+                    $('.summary-item#start-date').text('Not Selected!');
+                }
+                else {
+                    $('.summary-item#start-date').removeClass('error');
+                    $('.summary-item#start-date').text(`From ${ordinalSuffix(startDate.getDate())} of ${MONTH_NAMES[startDate.getMonth()]} ${startDate.getFullYear()}`);
+                }
+
+                if (isNaN(endDate)) {
+                    $('.summary-item#end-date').addClass('error');
+                    $('.summary-item#end-date').text('Not Selected!');
+                }
+                else {
+                    $('.summary-item#end-date').removeClass('error');
+                    $('.summary-item#end-date').text(`To ${ordinalSuffix(endDate.getDate())} of ${MONTH_NAMES[endDate.getMonth()]} ${endDate.getFullYear()}`);
+                }
+            }
+
+            /* Update the "Selected Variables" field of the summary page. */
+            function updateSummaryPageVariables() {
+                $('.summary-item#selected-variables').empty();
+
+                var selectedVariables = $('.variable:checked');
+
+                if (selectedVariables.length == 0) {
+                    $('.summary-item#selected-variables').append(`<li class="error">No Variables Selected!</li>`);
+                }
+                else {
+                    selectedVariables.map(function(i, element) {
+                        $('.summary-item#selected-variables').append(`
+                            <li short-name="${element.getAttribute('short-name')}" long-name="${element.getAttribute('long-name')}">${element.getAttribute('long-name')}</li>
+                        `);
+                    });
+                }
+            }
+
+            //Give a number and get it back with the ordinal suffix (st, nd, rd, or th).
+            //Credit to Salman. A: https://stackoverflow.com/a/13627586/8306962
+            function ordinalSuffix(i) {
+                var j = i % 10,
+                    k = i % 100;
+
+                if (j == 1 && k != 11) {
+                    return i + "st";
+                }
+                if (j == 2 && k != 12) {
+                    return i + "nd";
+                }
+                if (j == 3 && k != 13) {
+                    return i + "rd";
+                }
+
+                return i + "th";
             }
         </script>
     </head>
@@ -143,31 +246,28 @@
                     <a href="#" class="col-2 align-self-end side-button-right align-self-end orange">Import Shapefile</a>
                 </div>
                 <div class="row options" id="step2-options">
-                    <div class="col-5 box align-self-start" >
+                    <div class="col-3 box align-self-start" >
                         <h4>Time Period</h4>
                         <div class="row" style="padding: 0">
-                        <div class="col-6 flex-row">
-                            <label class="col-4" style="padding: 0;margin: 0">Start Date:</label>
-                            <input type="date"  class="col-7">
-                        </div>
-                        <div class="col-6 flex-row">
-                            <label class="col-4" style="padding: 0;margin: 0">End Date:</label>
-                            <input type="date" class="col-7">
-                        </div>
+                            <div class="col-6 flex-row">
+                                <label style="padding: 0;margin: 0">Start Date</label>
+                                <input type="date" id="start-date">
+                            </div>
+                            <div class="col-6 flex-row">
+                                <label style="padding: 0;margin: 0">End Date</label>
+                                <input type="date" id="end-date">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-3 box align-self-start">
+                    <div class="col-2 box align-self-start">
                         <h4>Ensemble Member</h4>
-                        <div class="flex-row">
-                            <label class="col-3" style="padding: 0;margin: 0">Select</label>
-                            <select class="col-7">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                            </select>
-                        </div>
+                        <select>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
                     </div>
                     <div  class="col-2 align-self-end search-box">
-                        <input class="search-txt" type="text" name="" placeholder="Type to search">
+                        <input class="search-txt" type="text" name="" placeholder="Search Variables">
                         <a class="search-btn" href="#"></a>
                     </div>
                 </div>
@@ -180,9 +280,9 @@
                             <option>Excel</option>
                         </select>
                     </div>
-                    <div class="col-3 box align-self-start">
+                    <div class="col-2 box align-self-start">
                         <h4>Estimated Subset Size</h4>
-                        <h6 id="extractSize">500Mb</h6>
+                        <h6 class="summary-item" id="extract-size">500Mb</h6>
                     </div>
                 </div>
             </div>
@@ -200,6 +300,7 @@
                         <!-- Generate variables dynamically, more scalable. -->
                         <script>
                             $(document).ready(function() {
+                                //Variables in a 2d array, first is long name then short name.
                                 var variables = [
                                     ["Humidity", "hmd"],
                                     ["Temperature", "tmp"],
@@ -210,8 +311,8 @@
                                 {
                                     $('#variable-list').append(`
                                         <div>
-                                            <label>` + variables[i][0] + `</label>
-                                            <input type="checkbox" name="` + variables[i][0] + `" value="` + variables[i][1] + `">
+                                            <label>${variables[i][0]}</label>
+                                            <input class="variable" type="checkbox" short-name="${variables[i][1]}" long-name="${variables[i][0]}">
                                         </div>
                                     `);
                                 }
@@ -223,16 +324,16 @@
                     <h2>Selection Summary</h2>
 
                     <h4>Selected Area</h4>
-                    <label>Rectangle, 52.3ha</label>
+                    <label class="summary-item" id="selected-area">Rectangle, 52.3ha</label>
 
                     <h4>Selected Time Period</h4>
-                    <label>Start Date: 01-May-2020</label>
+                    <label class="summary-item" id="start-date">Start Date: 01-May-2020</label>
                     <br/>
-                    <label>End Date: 06-May-2020</label>
+                    <label class="summary-item" id="end-date">End Date: 06-May-2020</label>
                     <br/>
 
                     <h4>Selected Variables</h4>
-                    <ul>
+                    <ul class="summary-item" id="selected-variables">
                         <li>Tempurature</li>
                         <li>Wind Speed</li>
                     </ul>
