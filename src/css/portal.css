@@ -296,16 +296,31 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 #map-controls button:enabled {
     color: white;
+    background-color: #ff875f;
 }
 
-#map-controls button:hover {
+#map-controls button:enabled:hover {
+    background-color: white;
     color: grey;
+}
+
+#map-controls button:disabled:hover {
+    background-color: #F37B53 !important;
+    color: rgba(110,110,110,0.4) !important;
 }
 
 #map-controls button[title="Reshape"] {
     display: none;
 }
 
+#map-controls .esri-sketch__button.esri-icon-undo {
+    margin-right: 7px;
+}
+
+#map-controls .esri-sketch__button.esri-icon-trash {
+    background-color: #ff9470;
+}
+
 #map-controls .esri-sketch__info-panel {
-    background-color: #FF8C65;
+    background-color: #ff875f;
 }
