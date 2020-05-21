@@ -93,7 +93,26 @@
                 $('#map-rectangle-button').click(function() {
                     $('#mapDiv button.esri-icon-checkbox-unchecked').click();
                 });
+
+                $('#start-date').change(function() {
+                    checkDatesValid();
+                });
+
+                $('#end-date').change(function() {
+                    checkDatesValid();
+                });
             });
+
+            function checkDatesValid() {
+                var startDate = $('#start-date').val();
+                var endDate = $('#end-date').val();
+
+                if (startDate.length > 0 && endDate.length > 0) {
+                    if (startDate > endDate) {
+                        alert('Start date cannot come after end date!');
+                    }
+                }
+            }
 
             function selectStep(stepInt) {
                 if (stepInt >= FIRST_STEP && stepInt <= LAST_STEP) {
@@ -172,6 +191,21 @@
                 else {
                     $('.summary-item#end-date').removeClass('error');
                     $('.summary-item#end-date').text(`To ${ordinalSuffix(endDate.getDate())} of ${MONTH_NAMES[endDate.getMonth()]} ${endDate.getFullYear()}`);
+                }
+
+                //Check dates are in correct order (start before end).
+                if (!isNaN(startDate) && !isNaN(endDate)) {
+                    const NORMAL_TEXT = `Selected Time Period`;
+                    const ERROR_TEXT = `Selected Time Period - ERROR: Start and End dates are in wrong order!`;
+
+                    if (startDate > endDate) {
+                        $('.summary-item#date-title').addClass('error');
+                        $('.summary-item#date-title').text(ERROR_TEXT);
+                    }
+                    else {
+                        $('.summary-item#date-title').removeClass('error');
+                        $('.summary-item#date-title').text(NORMAL_TEXT);
+                    }
                 }
             }
 
@@ -324,7 +358,7 @@
                     <h4>Selected Area</h4>
                     <label class="summary-item" id="selected-area">Rectangle, 52.3ha</label>
 
-                    <h4>Selected Time Period</h4>
+                    <h4 class="summary-item" id="date-title">Selected Time Period</h4>
                     <label class="summary-item" id="start-date">Start Date: 01-May-2020</label>
                     <br/>
                     <label class="summary-item" id="end-date">End Date: 06-May-2020</label>
