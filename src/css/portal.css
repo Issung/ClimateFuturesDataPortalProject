@@ -116,7 +116,7 @@
 }
 
 #options-container .options .box * {
-    padding-bottom: 5px;
+    /* padding-bottom: 5px; */
     width: 100%;
     border-radius:5px;
 }
@@ -281,10 +281,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: none;
 }
 
-#mapDiv button[title="Reshape"] {
-    display: none;
-}
-
 #book-icon {
     width: 25px;
     height: 25px;
@@ -292,5 +288,24 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-right: 5px;
 }
 
+/* Map Controls */
 
+#map-controls {
+    background-color: #F37B53;
+}
 
+#map-controls button:enabled {
+    color: white;
+}
+
+#map-controls button:hover {
+    color: grey;
+}
+
+#map-controls button[title="Reshape"] {
+    display: none;
+}
+
+#map-controls .esri-sketch__info-panel {
+    background-color: #FF8C65;
+}

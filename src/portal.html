@@ -29,7 +29,6 @@
             var currentStep = 1;
 
             $(document).ready(function() {
-
                 //Webpage starts on step 1 so hide step 2 and 3 and other irrelevant controls.
                 $('#step2-options').hide();
                 $('#step3-options').hide();
@@ -89,6 +88,10 @@
                     element.click();
 
                     document.body.removeChild(element);
+                });
+
+                $('#map-rectangle-button').click(function() {
+                    $('#mapDiv button.esri-icon-checkbox-unchecked').click();
                 });
             });
 
@@ -234,16 +237,10 @@
                 <div class="row options" id="step1-options">
                     <div class="col-2 box align-self-start">
                         <h4>Map Selection</h4>
-                        <select>
-                            <option>Rectangle</option>
-                            <option>Radius</option>
-                            <option>Polygon</option>
-                        </select>
+                        <div id="map-controls">
+                            
+                        </div>
                     </div>
-                    <!-- <div class="col-3 box align-self-start">
-                        <h4>Example Box 2</h4>
-                        <input type="date" name="birthday" value="2020-12-31">
-                    </div> -->
                     <a href="#" class="col-2 align-self-end side-button-right align-self-end orange">Import Shapefile</a>
                 </div>
                 <div class="row options" id="step2-options">

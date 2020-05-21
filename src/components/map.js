@@ -24,6 +24,7 @@ require([
     const sketch = new Sketch({
         layer: layer,
         view: view,
+        container: document.getElementById('map-controls'),
         creationMode: "update",
         availableCreateTools: ["rectangle"],
         defaultUpdateOptions: {
@@ -32,7 +33,8 @@ require([
         }
     });
 
-    view.ui.add(sketch, "top-right");
+    //Don't add to view anymore because it is part of the outer DOM (options box).
+    //view.ui.add(sketch, "top-right");
 
     //https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html
     /*view.on("click", function(event) {
