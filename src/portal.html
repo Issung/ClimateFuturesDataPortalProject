@@ -103,6 +103,34 @@
                 $('#end-date').change(function() {
                     checkDatesValid();
                 });
+
+                /*Ajax use POST method for Download Func*/
+                $('#download-button').click(function () {
+                    var area;
+                    var variables = $('.variable:checked');
+                    var stime = new Date($('input#start-date').val());
+                    var etime = new Date($('input#end-date').val());
+                    var ensemble_members = $('#step2-options select option:selected').text();
+
+                    $.ajax({
+                        url:'des.jsp',
+                        type:'POST',
+                        traditional:true,
+                        data:{
+                            area: area,
+                            variables: variables,
+                            stime: stime,
+                            etime: etime,
+                            ensemble_members: ensemble_members
+                        },
+                        success:function (data,status) {
+                            alert(data+status);
+                        },
+                        error:function () {
+                            alert("Something Wrong");
+                        }
+                    })
+                });
             });
 
             function checkDatesValid() {
