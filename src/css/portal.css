@@ -1,3 +1,10 @@
+.tagline {
+    color:#889;
+    font: normal 100 20px sans-serif;
+    margin-top: 55px;
+    min-width:333px;
+}
+
 #steps {
     background-color: #1C5A75;
     min-height: 50px;
@@ -133,6 +140,15 @@
 .content {
     width: 100%;
     height: 100%;
+}
+
+a.button {
+    border-radius: 25px;
+    padding: 10px;
+    text-align: center;
+    -webkit-box-shadow: -5px 5px 13px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: -5px 5px 13px -5px rgba(0,0,0,0.75);
+    box-shadow: -5px 5px 13px -5px rgba(0,0,0,0.75);
 }
 
 .side-button-left {

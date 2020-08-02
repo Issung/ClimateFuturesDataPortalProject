@@ -5,5 +5,5 @@
     String etime=request.getParameter("etime");
     String ensemble_members=request.getParameter("ensemble_members");
 
-    out.println(area+"\n"+variables+"\n"+stime+"\n"+etime+"\n"+ensemble_members);
+    out.println(area + "\n" + variables + "\n" + stime + "\n" + etime + "\n" + ensemble_members);
 %>

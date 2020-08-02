@@ -53,14 +53,6 @@ body {
     background-color: white;
 }
 
-.tagline {
-    color:#889;
-    font: normal 100 20px sans-serif;
-    margin-top: 51px;
-    margin-left:150px;
-    min-width:333px;
-}
-
 #middle{
     display: flex;
     flex-direction: row;
@@ -83,8 +75,8 @@ body {
 
 /*Media Queries*/
 
-@media screen and (max-width: 1000px) {
+/* @media screen and (max-width: 1000px) {
     .tagline{
         display: none;
     }
-}
+} */

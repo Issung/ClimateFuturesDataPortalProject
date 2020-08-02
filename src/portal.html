@@ -39,7 +39,7 @@
                 $('#step3-content').hide();
 
                 $('#previous-step-button').hide();
-                $('#download-button').hide();
+                $('.download-button').hide();
 
                 //User clicks a step.
                 $('.step').click(function () {
@@ -75,7 +75,7 @@
                     })
                 });
 
-                $('#download-button').click(function() {
+                $('.download-button').click(function() {
                     //This will eventually download data from backend code but for now it generates an example file and opens a save dialog.
                     var filename = "ExampleClimateDataFile.nc";
                     var text = "Data goes here.";
@@ -104,8 +104,8 @@
                     checkDatesValid();
                 });
 
-                /*Ajax use POST method for Download Func*/
-                $('#download-button').click(function () {
+                /* Ajax use POST method for Download Function */
+                $('.download-button').click(function () {
                     var area;
                     var variables = $('.variable:checked');
                     var stime = new Date($('input#start-date').val());
@@ -113,20 +113,20 @@
                     var ensemble_members = $('#step2-options select option:selected').text();
 
                     $.ajax({
-                        url:'des.jsp',
-                        type:'POST',
-                        traditional:true,
-                        data:{
+                        url: 'des.jsp',
+                        type: 'POST',
+                        traditional: true,
+                        data: {
                             area: area,
                             variables: variables,
                             stime: stime,
                             etime: etime,
                             ensemble_members: ensemble_members
                         },
-                        success:function (data,status) {
-                            alert(data+status);
+                        success: function (data,status) {
+                            alert(data + status);
                         },
-                        error:function () {
+                        error: function () {
                             alert("Something Wrong");
                         }
                     })
@@ -171,11 +171,11 @@
                     //Show/Hide "Next Step" and "Download" buttons.
                     if (stepInt == LAST_STEP) {
                         $('#next-step-button').hide();
-                        $('#download-button').show();
+                        $('.download-button').show();
                     }
                     else {
                         $('#next-step-button').show();
-                        $('#download-button').hide();
+                        $('.download-button').hide();
                     }
                 }
             }
@@ -279,11 +279,13 @@
     </head>
     <body>
         <div class="container-fluid content-stretcher">
-            <div class="row content-stretcher-header justify-content-center" style="min-height: 106px">
-                <a class="col-md-3" href="https://climatefutures.org.au/" target="_blank">
-                    <img alt="Climate Futures Logo" src="img/logo-small.png" style="margin-top: 30px;" />
+
+            <!-- Header. Contains ClimateFutures logo and tagline. Hidden on sizes lower than lg. -->
+            <div class="d-none d-lg-flex row content-stretcher-header justify-content-center" style="min-height: 106px">
+                <a class="col-lg-5 col-xl-4 d-flex justify-content-center" href="https://climatefutures.org.au/" target="_blank">
+                    <img alt="Climate Futures Logo" src="img/logo-small.png" style="margin-top: 34px; max-height:40px;" />
                 </a>
-                <div class="col-md-3">
+                <div class="col-lg-5 col-xl-4 d-flex justify-content-center">
                     <main>
                         <p class="tagline">
                             Climate Science for Australia's Future
@@ -299,7 +301,7 @@
             </div>
             <div class="row" id="options-container">
                 <div class="row options" id="step1-options">
-                    <div class="col-2 box align-self-start">
+                    <div class="col-2 box align-self-start" style="min-width: 225px;">
                         <h4>Map Selection</h4>
                         <div id="map-controls">
                             
@@ -308,7 +310,7 @@
                     <a href="#" class="col-2 align-self-end side-button-right align-self-end orange">Import Shapefile</a>
                 </div>
                 <div class="row options" id="step2-options">
-                    <div class="col-3 box align-self-start" >
+                    <div class="col-3 box align-self-start" style="min-width: 375px; padding-right: 0px;">
                         <h4>Time Period</h4>
                         <div class="row" style="padding: 0">
                             <div class="col-6 flex-row">
@@ -404,12 +406,17 @@
                         <li>Tempurature</li>
                         <li>Wind Speed</li>
                     </ul>
+
+                    <!-- Download button for when footer is hidden. Only shown on sizes lower than lg. -->
+                    <a href="#" class="download-button d-block d-lg-none blue button" style="max-width: 225px">Download</a>
                 </div>
             </div>
-            <div class="row content-stretcher-footer bg-dark-blue" style="min-height: 100px !important;">
+
+            <!-- Footer with buttons. Hidden on sizes lower than lg. -->
+            <div class="d-none d-lg-flex row content-stretcher-footer bg-dark-blue" style="min-height: 100px !important;">
                 <a href="#" id="previous-step-button" class="col-2 align-self-end side-button-left align-self-end blue">Previous Step</a>
                 <a href="#" id="next-step-button" class="col-2 align-self-end side-button-right align-self-end blue">Next Step</a>
-                <a href="#" id="download-button" class="col-2 align-self-end side-button-right align-self-end blue switch-btn">Download</a>
+                <a href="#" class="download-button col-2 align-self-end side-button-right align-self-end blue switch-btn">Download</a>
             </div>
         </div>
     </body>
