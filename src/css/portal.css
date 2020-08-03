@@ -10,12 +10,22 @@
 }
 
 .step {
+    align-items: center;
     text-align: center;
+    display: flex;
+    justify-content: center;
     -webkit-box-shadow: inset 63px 10px 41px -74px rgba(0,0,0,0.75);
     -moz-box-shadow: inset 63px 10px 41px -74px rgba(0,0,0,0.75);
     box-shadow: inset 63px 10px 41px -74px rgba(0,0,0,0.75);
     color: white;
     font-size: 20px;
+}
+
+@media only screen and (min-width: 767px) {
+    /* Move text slightly upwards to center it. */
+    .step span {
+        padding-bottom: 4px;
+    }
 }
 
 .step:hover {
