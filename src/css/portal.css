@@ -348,3 +348,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 #map-controls .esri-sketch__info-panel {
     background-color: #ff875f;
 }
+
+.esri-attribution {
+    background-color: rgba(36,36,36,0.65) !important;
+    color: #e2e2e2 !important;
+}
