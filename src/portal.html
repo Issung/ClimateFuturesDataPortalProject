@@ -373,16 +373,20 @@
                             $(document).ready(function() {
                                 //Variables in a 2d array, first is long name then short name.
                                 var variables = [
+                                    ["Air Temperature", "ta850"], //ta500, ta200
+                                    ["Eastward Wind", "ua850"], //ua500, ua200
+                                    ["Geopotential Height", "zg500"],  //zg200
+                                    ["Northward Wind", "va850"], //va500, va200
                                     ["Near-Surface Air Temperature", "tas"], 
-									["Daily Maximum Near-Surface Air Temperature", "tasmax"], 
-									["Daily Minimum Near-Surface Air Temperature", "tasmin"], 
+									["Daily Max Near-Surface Air Temperature", "tasmax"], 
+									["Daily Min Near-Surface Air Temperature", "tasmin"], 
 									["Precipitation", "pr"], 
 									["Surface Air Pressure", "ps"], 
 									["Sea Level Pressure", "psl"], 
 									["Near-Surface Specific Humidity", "huss"], 
 									["Near-Surface Relative Humidity", "hurs"], 
 									["Near-Surface Wind Speed", "sfcWind"], 
-									["Daily Maximum Near-Surface Wind Speed", "sfcWindmax"], 
+									["Daily Max Near-Surface Wind Speed", "sfcWindmax"], 
 									["Total Cloud Fraction", "clt"], 
 									["Duration of Sunshine", "sund"], 
 									["Surface Downwelling Shortwave Radiation", "rsds"], 
@@ -399,14 +403,14 @@
 									["Total Soil Moisture Content", "mrso"], 
 									["Surface Snow Amount", "snw"], 
 									["Surface Snow Melt", "snm"], 
-									["Daily Maximum Hourly Precipitation Rate", "prhmax"], 
+									["Daily Max Hourly Precipitation Rate", "prhmax"], 
 									["Convective Precipitation", "prc"], 
 									["TOA Outgoing Longwave Radiation", "rlut"], 
 									["TOA Incident Shortwave Radiation", "rsdt"], 
 									["TOA Outgoing Shortwave Radiation", "rsut"], 
 									["Eastward Near-Surface Wind", "uas"], 
 									["Northward Near-Surface Wind", "vas"], 
-									["Daily Maximum Near-Surface Wind Speed of Gust", "wsgsmax"], 
+									["Daily Max Near-Surface Wind Speed of Gust", "wsgsmax"], 
 									["Surface Downward Eastward Wind Stress", "tauu"], 
 									["Surface Downward Northward Wind Stress", "tauv"], 
 									["Surface Temperature", "ts"], 
@@ -414,18 +418,7 @@
 									["Water Vapor Path", "prw"], 
 									["Condensed Water Path", "clwvi"], 
 									["Ice Water Path", "clivi"], 
-									["Eastward Wind", "ua850"], 
-									["Northward Wind", "va850"], 
-									["Air Temperature", "ta850"], 
-									["Specific Humidity", "hus850"], 
-									["Eastward Wind", "ua500"], 
-									["Northward Wind", "va500"], 
-									["Geopotential Height", "zg500"], 
-									["Air Temperature", "ta500"], 
-									["Eastward Wind", "ua200"], 
-									["Northward Wind", "va200"], 
-									["Air Temperature", "ta200"], 
-									["Geopotential Height", "zg200"], 
+									["Specific Humidity", "hus850"],  
 									["High Level Cloud Fraction", "clh"], 
 									["Mid Level Cloud Fraction", "clm"], 
 									["Low Level Cloud Fraction", "cll"], 
@@ -438,7 +431,7 @@
 									["Land Area Fraction", "sftlf"], 
 									["Fraction of Grid Cell Covered with Glacier", "sftgif"], 
 									["Capacity of Soil to Store Water", "mrsofc"], 
-									["Maximum Root Depth", "rootd"], 
+									["Max Root Depth", "rootd"], 
                                 ];
 
                                 for(var i = 0; i < variables.length; i++)
