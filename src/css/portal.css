@@ -360,3 +360,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: rgba(36,36,36,0.65) !important;
     color: #e2e2e2 !important;
 }
+
+#variable-list label:hover {
+    color: #C66447;
+    font-weight: bold;
+}
