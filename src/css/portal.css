@@ -362,6 +362,5 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 #variable-list label:hover {
-    color: #C66447;
     font-weight: bold;
 }
