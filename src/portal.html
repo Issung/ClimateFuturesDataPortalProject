@@ -66,7 +66,7 @@
                 $(".search-txt").keyup(function () {
                     var value = $(this).val().toLowerCase();
 
-                    $('.variable-list div').each(function () {
+                    $('#variable-list > div').each(function () {
                         $(this).hide();
 
                         if ($(this).text().toLowerCase().indexOf($.trim(value)) >= 0) {
@@ -129,7 +129,7 @@
                         error: function () {
                             alert("Something Wrong");
                         }
-                    })
+                    });
                 });
             });
 
@@ -298,7 +298,7 @@
             <div class="row" id="steps">
                 <a href="#" class="col-sm-12 col-md-3 step selected switch-btn" id="step1"><span>Area</span></a>
                 <a href="#" class="col-sm-12 col-md-3 step switch-btn" id="step2"><span>Time & Variables</span></a>
-                <a href="#" class="col-sm-12 col-md-3 step switch-btn" id="step3"><span>Summary & Download</span></a>
+                <a href="#" class="col-sm-12 col-md-3 step switch-btn" id="step3"><span>Download</span></a>
                 <a href="manual.html" target="_blank" class="col-sm-12 col-md-3 step"><span><i class="fas fa-book" style="margin-right: 10px"></i>Manual</span></a>
             </div>
             <div class="row" id="options-container">
@@ -309,10 +309,10 @@
                             
                         </div>
                     </div>
-                    <a href="#" class="col-2 align-self-end side-button-right align-self-end orange">Import Shapefile</a>
+                    <a href="#" class="col-4 col-md-3 col-lg-2  align-self-end side-button-right align-self-end orange">Import Shapefile</a>
                 </div>
                 <div class="row options" id="step2-options">
-                    <div class="col-3 box align-self-start" style="min-width: 375px; padding-right: 0px;">
+                    <div class="col-6 col-md-5 box align-self-start" style="max-width: 375px; padding-right: 0px;">
                         <h4>Time Period</h4>
                         <div class="row" style="padding: 0">
                             <div class="col-6 flex-row">
@@ -325,7 +325,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-2 box align-self-start">
+                    <div class="col-4 col-md-2 box align-self-start">
                         <h4>Ensemble Member</h4>
                         <select style="position: absolute; bottom: 15px; width: calc(100% - 40px);">
                             <option>None</option>
@@ -337,21 +337,19 @@
                             <option>Option 6</option>
                         </select>
                     </div>
-                    <div class="col-2 align-self-end search-box">
-                        <input class="search-txt" type="text" name="" placeholder="Search Variables">
-                        <a class="search-btn" href="#"></a>
+                    <div class="col-12 col-md-2 align-self-end search-box">
+                        <input class="search-txt" type="text" name="" placeholder="Search">
+                        <span class="search-btn" href="#"></span>
                     </div>
                 </div>
                 <div class="row options" id="step3-options">
-                    <div class="col-2 box align-self-start">
+                    <!-- <div class="col-5 col-md-4 col-lg-3 box align-self-start">
                         <h4>Extraction Format</h4>
                         <select>
                             <option>NetCDF</option>
-                            <!-- <option>CSV</option>
-                            <option>Excel</option> -->
                         </select>
-                    </div>
-                    <div class="col-2 box align-self-start">
+                    </div> -->
+                    <div class="col-5 col-md-4 col-lg-3 box align-self-start">
                         <h4>Estimated Subset Size</h4>
                         <h6 class="summary-item" id="extract-size">500Mb</h6>
                     </div>
@@ -367,7 +365,7 @@
                     <p id="info" style="position:absolute; padding:2px 6px 2px 6px; background-color: #00000061; color:white; bottom:15px; right:15px;"></p>
                 </div>
                 <div class="content gap" id="step2-content">
-                    <form class="variable-list" id="variable-list">
+                    <div class="row" class="variable-list" id="variable-list">
                         <!-- Generate variables dynamically, more scalable. -->
                         <script>
                             $(document).ready(function() {
@@ -378,74 +376,76 @@
                                     ["Geopotential Height", "zg500"],  //zg200
                                     ["Northward Wind", "va850"], //va500, va200
                                     ["Near-Surface Air Temperature", "tas"], 
-									["Daily Max Near-Surface Air Temperature", "tasmax"], 
-									["Daily Min Near-Surface Air Temperature", "tasmin"], 
-									["Precipitation", "pr"], 
-									["Surface Air Pressure", "ps"], 
-									["Sea Level Pressure", "psl"], 
-									["Near-Surface Specific Humidity", "huss"], 
-									["Near-Surface Relative Humidity", "hurs"], 
-									["Near-Surface Wind Speed", "sfcWind"], 
-									["Daily Max Near-Surface Wind Speed", "sfcWindmax"], 
-									["Total Cloud Fraction", "clt"], 
-									["Duration of Sunshine", "sund"], 
-									["Surface Downwelling Shortwave Radiation", "rsds"], 
-									["Surface Downwelling Longwave Radiation", "rlds"], 
-									["Surface Upward Latent Heat Flux", "hfls"], 
-									["Surface Upward Sensible Heat Flux", "hfss"], 
-									["Surface Upwelling Shortwave Radiation", "rsus"], 
-									["Surface Upwelling Longwave Radiation", "rlus"], 
-									["Evaporation", "evspsbl"], 
-									["Potential Evapotranspiration", "evspsblpot"], 
-									["Soil Frozen Water Content", "mrfso"], 
-									["Surface Runoff", "mrros"], 
-									["Total Runoff", "mrro"], 
-									["Total Soil Moisture Content", "mrso"], 
-									["Surface Snow Amount", "snw"], 
-									["Surface Snow Melt", "snm"], 
-									["Daily Max Hourly Precipitation Rate", "prhmax"], 
-									["Convective Precipitation", "prc"], 
-									["TOA Outgoing Longwave Radiation", "rlut"], 
-									["TOA Incident Shortwave Radiation", "rsdt"], 
-									["TOA Outgoing Shortwave Radiation", "rsut"], 
-									["Eastward Near-Surface Wind", "uas"], 
-									["Northward Near-Surface Wind", "vas"], 
-									["Daily Max Near-Surface Wind Speed of Gust", "wsgsmax"], 
-									["Surface Downward Eastward Wind Stress", "tauu"], 
-									["Surface Downward Northward Wind Stress", "tauv"], 
-									["Surface Temperature", "ts"], 
-									["Height of Boundary Layer", "zmla"], 
-									["Water Vapor Path", "prw"], 
-									["Condensed Water Path", "clwvi"], 
-									["Ice Water Path", "clivi"], 
-									["Specific Humidity", "hus850"],  
-									["High Level Cloud Fraction", "clh"], 
-									["Mid Level Cloud Fraction", "clm"], 
-									["Low Level Cloud Fraction", "cll"], 
-									["Snow Area Fraction", "snc"], 
-									["Snow Depth", "snd"], 
-									["Sea Ice Area Fraction", "sic"], 
-									["Snowfall Flux", "prsn"], 
-									["Atmosphere Grid-Cell Area", "areacella"], 
-									["Surface Altitude", "orog"], 
-									["Land Area Fraction", "sftlf"], 
-									["Fraction of Grid Cell Covered with Glacier", "sftgif"], 
-									["Capacity of Soil to Store Water", "mrsofc"], 
-									["Max Root Depth", "rootd"], 
+                                    ["Daily Max Near-Surface Air Temperature", "tasmax"], 
+                                    ["Daily Min Near-Surface Air Temperature", "tasmin"], 
+                                    ["Precipitation", "pr"], 
+                                    ["Surface Air Pressure", "ps"], 
+                                    ["Sea Level Pressure", "psl"], 
+                                    ["Near-Surface Specific Humidity", "huss"], 
+                                    ["Near-Surface Relative Humidity", "hurs"], 
+                                    ["Near-Surface Wind Speed", "sfcWind"], 
+                                    ["Daily Max Near-Surface Wind Speed", "sfcWindmax"], 
+                                    ["Total Cloud Fraction", "clt"], 
+                                    ["Duration of Sunshine", "sund"], 
+                                    ["Surface Downwelling Shortwave Radiation", "rsds"], 
+                                    ["Surface Downwelling Longwave Radiation", "rlds"], 
+                                    ["Surface Upward Latent Heat Flux", "hfls"], 
+                                    ["Surface Upward Sensible Heat Flux", "hfss"], 
+                                    ["Surface Upwelling Shortwave Radiation", "rsus"], 
+                                    ["Surface Upwelling Longwave Radiation", "rlus"], 
+                                    ["Evaporation", "evspsbl"], 
+                                    ["Potential Evapotranspiration", "evspsblpot"], 
+                                    ["Soil Frozen Water Content", "mrfso"], 
+                                    ["Surface Runoff", "mrros"], 
+                                    ["Total Runoff", "mrro"], 
+                                    ["Total Soil Moisture Content", "mrso"], 
+                                    ["Surface Snow Amount", "snw"], 
+                                    ["Surface Snow Melt", "snm"], 
+                                    ["Daily Max Hourly Precipitation Rate", "prhmax"], 
+                                    ["Convective Precipitation", "prc"], 
+                                    ["TOA Outgoing Longwave Radiation", "rlut"], 
+                                    ["TOA Incident Shortwave Radiation", "rsdt"], 
+                                    ["TOA Outgoing Shortwave Radiation", "rsut"], 
+                                    ["Eastward Near-Surface Wind", "uas"], 
+                                    ["Northward Near-Surface Wind", "vas"], 
+                                    ["Daily Max Near-Surface Wind Speed of Gust", "wsgsmax"], 
+                                    ["Surface Downward Eastward Wind Stress", "tauu"], 
+                                    ["Surface Downward Northward Wind Stress", "tauv"], 
+                                    ["Surface Temperature", "ts"], 
+                                    ["Height of Boundary Layer", "zmla"], 
+                                    ["Water Vapor Path", "prw"], 
+                                    ["Condensed Water Path", "clwvi"], 
+                                    ["Ice Water Path", "clivi"], 
+                                    ["Specific Humidity", "hus850"],  
+                                    ["High Level Cloud Fraction", "clh"], 
+                                    ["Mid Level Cloud Fraction", "clm"], 
+                                    ["Low Level Cloud Fraction", "cll"], 
+                                    ["Snow Area Fraction", "snc"], 
+                                    ["Snow Depth", "snd"], 
+                                    ["Sea Ice Area Fraction", "sic"], 
+                                    ["Snowfall Flux", "prsn"], 
+                                    ["Atmosphere Grid-Cell Area", "areacella"], 
+                                    ["Surface Altitude", "orog"], 
+                                    ["Land Area Fraction", "sftlf"], 
+                                    ["Fraction of Grid Cell Covered with Glacier", "sftgif"], 
+                                    ["Capacity of Soil to Store Water", "mrsofc"], 
+                                    ["Max Root Depth", "rootd"], 
                                 ];
 
                                 for(var i = 0; i < variables.length; i++)
                                 {
                                     $('#variable-list').append(`
-                                        <div>
-                                            <label>${variables[i][0]}</label>
-                                            <input class="variable" type="checkbox" short-name="${variables[i][1]}" long-name="${variables[i][0]}">
+                                        <div class="col-12 col-md-6 col-xl-4">
+                                            <div class="result">
+                                                <input class="variable" type="checkbox" short-name="${variables[i][1]}" long-name="${variables[i][0]}">
+                                                <label>${variables[i][0]}</label>
+                                            </div>
                                         </div>
                                     `);
                                 }
                             });
                         </script>
-                    </form>
+                    </div>
                 </div>
                 <div class="content gap" id="step3-content">
                     <h2>Selection Summary</h2>
@@ -479,8 +479,8 @@
 
             <!-- Small Privacy Policy Button -->
             <div class="row d-flex justify-content-center">
-                <div class="col-12">
-                    <a href="privacy.html" style="font-size: 12px; position: absolute; bottom: 0px; width: 100%; text-align: center; color: #e2e2e2;">Privacy Policy</a>
+                <div class="col-12 d-flex justify-content-center">
+                    <a href="privacy.html" style="font-size: 12px; position: absolute; bottom: 0px; text-align: center; color: #e2e2e2;">Privacy Policy</a>
                 </div>
             </div>
         </div>

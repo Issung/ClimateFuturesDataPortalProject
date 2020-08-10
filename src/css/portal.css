@@ -143,6 +143,8 @@
 
 #content-container {
     background-color: white;
+    overflow:overlay;
+    min-height:400px;
 }
 
 .content {
@@ -273,11 +275,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .variable-list {
-    display: flex;
+    display: block;
 }
 
-.variable-list>div {
+.variable-list div.result {
     margin: 5px 10px 5px 10px;
+    white-space: nowrap;
+    display:block;
+    float:left;
+    /* width:25%; */
+    overflow:hidden;
 }
 
 .variable-list div label {
