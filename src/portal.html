@@ -437,8 +437,8 @@
                                     $('#variable-list').append(`
                                         <div class="col-12 col-md-6 col-xl-4">
                                             <div class="result">
-                                                <input class="variable" type="checkbox" short-name="${variables[i][1]}" long-name="${variables[i][0]}">
-                                                <label>${variables[i][0]}</label>
+                                                <input id="${variables[i][0]}" class="variable" type="checkbox" short-name="${variables[i][1]}" long-name="${variables[i][0]}">
+                                                <label for="${variables[i][0]}">${variables[i][0]}</label>
                                             </div>
                                         </div>
                                     `);
