@@ -326,17 +326,26 @@
                         </div>
                     </div>
                     <div class="col-4 col-md-2 box align-self-start">
-                        <h4>Ensemble Member</h4>
+                        <h4>Time Resolution</h4>
                         <select style="position: absolute; bottom: 15px; width: calc(100% - 40px);">
-                            <option>None</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
-                            <option>Option 6</option>
+                            <option>1 Hour</option>
+                            <option>Daily</option>
+                            <option>Weekly</option>
+                            <option>Monthly</option>
                         </select>
                     </div>
+<!--                    <div class="col-4 col-md-2 box align-self-start">-->
+<!--                        <h4>Ensemble Member</h4>-->
+<!--                        <select style="position: absolute; bottom: 15px; width: calc(100% - 40px);">-->
+<!--                            <option>None</option>-->
+<!--                            <option>Option 1</option>-->
+<!--                            <option>Option 2</option>-->
+<!--                            <option>Option 3</option>-->
+<!--                            <option>Option 4</option>-->
+<!--                            <option>Option 5</option>-->
+<!--                            <option>Option 6</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
                     <div class="col-12 col-md-2 align-self-end search-box">
                         <input class="search-txt" type="text" name="" placeholder="Search">
                         <span class="search-btn" href="#"></span>
@@ -431,6 +440,10 @@
                                     ["Capacity of Soil to Store Water", "mrsofc"], 
                                     ["Max Root Depth", "rootd"], 
                                 ];
+
+                                variables = variables.sort(function (x,y) {
+                                    return x[0].localeCompare(y[0]);
+                                })
 
                                 for(var i = 0; i < variables.length; i++)
                                 {
