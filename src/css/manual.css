@@ -4,6 +4,10 @@ body {
     margin: 0
 }
 
+.tagline {
+    color:#889;
+    font: normal 100 20px sans-serif;
+}
 
 /*  These content-stretcher classes is used to stretch an inner content class to fill the remaining vertical space. 
     Credit goes to: https://stackoverflow.com/a/24979148/8306962 */
