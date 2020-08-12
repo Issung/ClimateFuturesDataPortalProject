@@ -185,6 +185,7 @@
                 updateSummaryPageEstimatedSize();
                 updateSummaryPageLocation();
                 updateSummaryPageTimePeriod();
+                updateSummaryPageTimeResolution();
                 updateSummaryPageVariables();
             }
 
@@ -237,6 +238,13 @@
                         $('.summary-item#date-title').text(NORMAL_TEXT);
                     }
                 }
+            }
+
+            /* Update the "Selected Time Resolution" field of the summary page. */
+            function updateSummaryPageTimeResolution() {
+                var name = $('select#time-resolution option:selected').text();      // Holds the name (Hourly, Daily, Monthly, Static).
+                var val = $('select#time-resolution').val();                        // Holds the value (1hr, day, mon, fx).
+                $('.summary-item#time-resolution').text(`${name} (${val})`);
             }
 
             /* Update the "Selected Variables" field of the summary page. */
@@ -327,11 +335,11 @@
                     </div>
                     <div class="col-4 col-md-2 box align-self-start">
                         <h4>Time Resolution</h4>
-                        <select style="position: absolute; bottom: 15px; width: calc(100% - 40px);">
-                            <option>All</option>
-                            <option>Hourly</option>
-                            <option>Daily</option>
-                            <option>Monthly</option>
+                        <select style="position: absolute; bottom: 15px; width: calc(100% - 40px);" id="time-resolution">
+                            <option value="1hr">Hourly</option>
+                            <option value="day">Daily</option>
+                            <option value="mon">Monthly</option>
+                            <option value="fx">Static</option>
                         </select>
                     </div>
 <!--                    <div class="col-4 col-md-2 box align-self-start">-->
@@ -358,7 +366,7 @@
                             <option>NetCDF</option>
                         </select>
                     </div> -->
-                    <div class="col-5 col-md-4 col-lg-3 box align-self-start">
+                    <div class="col-5 col-md-4 col-lg-3 col-xl-2 box align-self-start">
                         <h4>Estimated Subset Size</h4>
                         <h6 class="summary-item" id="extract-size">500Mb</h6>
                     </div>
@@ -443,7 +451,7 @@
 
                                 variables = variables.sort(function (x,y) {
                                     return x[0].localeCompare(y[0]);
-                                })
+                                });
 
                                 for(var i = 0; i < variables.length; i++)
                                 {
@@ -467,10 +475,13 @@
                     <label class="summary-item" id="selected-area">Rectangle, 52.3ha</label>
 
                     <h4 class="summary-item" id="date-title">Selected Time Period</h4>
-                    <label class="summary-item" id="start-date">Start Date: 01-May-2020</label>
+                    <label class="summary-item" id="start-date">Start Date: </label>
                     <br/>
-                    <label class="summary-item" id="end-date">End Date: 06-May-2020</label>
+                    <label class="summary-item" id="end-date">End Date: </label>
                     <br/>
+
+                    <h4 class="summary-item" id="time-resolution-title">Selected Time Resolution</h4>
+                    <label class="summary-item" id="time-resolution">Hourly</label>
 
                     <h4>Selected Variables</h4>
                     <ul class="summary-item" id="selected-variables">
