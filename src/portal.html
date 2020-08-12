@@ -227,11 +227,17 @@
                 //Check dates are in correct order (start before end).
                 if (!isNaN(startDate) && !isNaN(endDate)) {
                     const NORMAL_TEXT = `Selected Time Period`;
-                    const ERROR_TEXT = `Selected Time Period - ERROR: Start and End dates are in wrong order!`;
+                    const ERROR_TEXT = `Selected Time Period - Error: Start and End dates are in wrong order`;
+                    const DATA_EXTENT_TEXT = `Selected Time Period - Warning: No data stored past December 31st 2099`;
+                    const DATA_EXTENT = new Date('2099-12-31');
 
                     if (startDate > endDate) {
                         $('.summary-item#date-title').addClass('error');
                         $('.summary-item#date-title').text(ERROR_TEXT);
+                    }
+                    else if (startDate > DATA_EXTENT || endDate > DATA_EXTENT) {
+                        $('.summary-item#date-title').addClass('warning');
+                        $('.summary-item#date-title').text(DATA_EXTENT_TEXT);
                     }
                     else {
                         $('.summary-item#date-title').removeClass('error');
