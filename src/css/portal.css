@@ -368,3 +368,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .warning {
     color: #E88B00;
 }
+
+.esri-view-surface--inset-outline:focus::after{
+    outline:none !important;
+}
