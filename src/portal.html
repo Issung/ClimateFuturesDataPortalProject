@@ -197,10 +197,41 @@
 
             /* Update the "Selected Location/Area" field of the summary page. */
             function updateSummaryPageLocation() {
-                //TODO.
-                $('.summary-item#selected-area').text('Rectangle, 52.3ha (WIP)');
-            }
+                var graphics = sketch.layer.graphics;
 
+                if (graphics._items.length == 0)
+                {
+                    $('.summary-item#selected-area').addClass('error');
+                    $('.summary-item#selected-area').text('No area selected.');
+                }
+                else
+                {
+                    //Get the minimum lat/long and maximum lat/long by just creating an array of them all and finding the min and max of each.
+
+                    var gra = sketch.layer.graphics._items[0];
+    
+                    var lats = [], longs = [], minLat, maxLat, minLong, maxLong;
+    
+                    for (var i = 0; i < gra.geometry.rings.length; i++) {
+                      for (var p = 0; p < gra.geometry.rings[i].length; p++) {
+                            var point = gra.geometry.getPoint(i, p);
+    
+                            lats.push(point.latitude);
+                            longs.push(point.longitude);
+                        }
+                    }
+    
+                    maxLat = Math.max(...lats);
+                    maxLong = Math.max(...longs);
+                    minLat = Math.min(...lats);
+                    minLong = Math.min(...longs);
+
+                    //$('.summary-item#selected-area').text('Rectangle, 52.3ha (WIP)');
+                    $('.summary-item#selected-area').removeClass('error');
+                    $('.summary-item#selected-area').text(`Rectangle, Latitude: ${minLat} to ${maxLat}, Longitude: ${minLong} to ${maxLong}`);
+                }
+            }
+            
             /* Update the "Selected Time Period" field of the summary page. */
             function updateSummaryPageTimePeriod() {
                 var startDate = new Date($('input#start-date').val());

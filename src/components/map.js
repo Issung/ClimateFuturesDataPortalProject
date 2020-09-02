@@ -1,3 +1,8 @@
+var map;
+var view;
+var sketch;
+var wbmu;
+
 require([
     "esri/Map", 
     "esri/views/MapView",
@@ -8,20 +13,22 @@ require([
 ], function(Map, MapView, dom, webMercatorUtils, Sketch, GraphicsLayer) {
     const layer = new GraphicsLayer();
 
+    wbmu = webMercatorUtils;
+    
     // More basemaps here: https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
-    var map = new Map({
+    map = new Map({
         basemap: "satellite",
         layers: [layer]
     });
 
-    var view = new MapView({
+    view = new MapView({
         container: "mapDiv",
         map: map,
         zoom: 7,
         center: [146.4, -41.7] // longitude, latitude
     });
 
-    const sketch = new Sketch({
+    sketch = new Sketch({
         layer: layer,
         view: view,
         container: document.getElementById('map-controls'),
