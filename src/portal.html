@@ -30,6 +30,12 @@
 
             var currentStep = 1;
 
+            //Variables selected by the user.
+            var varStartDate, varEndDate;
+            var varMinLat, varMaxLat, varMinLong, varMaxLong;
+            var varVariables;
+            var varTimeResolution;
+
             $(document).ready(function() {
                 //Webpage starts on step 1 so hide step 2 and 3 and other irrelevant controls.
                 $('#step2-options').hide();
@@ -117,11 +123,12 @@
                         type: 'POST',
                         traditional: true,
                         data: {
-                            area: area,
-                            variables: variables,
-                            stime: stime,
-                            etime: etime,
-                            ensemble_members: ensemble_members
+                            start_date: "02/10/2010",
+                            end_date: "02/10/2020",
+                            bounds: [[144.208, 146.724], [-42.842, -41.301]],
+                            variable: "prc",
+                            ensemble_member: "CSIRO-BOM-ACCESS1-0",
+                            emission: "rcp85"
                         },
                         success: function (data,status) {
                             alert(data + status);
@@ -210,7 +217,7 @@
 
                     var gra = sketch.layer.graphics._items[0];
     
-                    var lats = [], longs = [], minLat, maxLat, minLong, maxLong;
+                    var lats = [], longs = [];
     
                     for (var i = 0; i < gra.geometry.rings.length; i++) {
                       for (var p = 0; p < gra.geometry.rings[i].length; p++) {
@@ -221,52 +228,52 @@
                         }
                     }
     
-                    maxLat = Math.max(...lats);
-                    maxLong = Math.max(...longs);
-                    minLat = Math.min(...lats);
-                    minLong = Math.min(...longs);
+                    varMinLat = Math.min(...lats);
+                    varMaxLat = Math.max(...lats);
+                    varMinLong = Math.min(...longs);
+                    varMaxLong = Math.max(...longs);
 
                     //$('.summary-item#selected-area').text('Rectangle, 52.3ha (WIP)');
                     $('.summary-item#selected-area').removeClass('error');
-                    $('.summary-item#selected-area').text(`Rectangle, Latitude: ${minLat} to ${maxLat}, Longitude: ${minLong} to ${maxLong}`);
+                    $('.summary-item#selected-area').text(`Rectangle, Latitude: ${varMinLat} to ${varMaxLat}, Longitude: ${varMinLong} to ${varMaxLong}`);
                 }
             }
-            
+
             /* Update the "Selected Time Period" field of the summary page. */
             function updateSummaryPageTimePeriod() {
-                var startDate = new Date($('input#start-date').val());
-                var endDate = new Date($('input#end-date').val());
+                varStartDate = new Date($('input#start-date').val());
+                varEndDate = new Date($('input#end-date').val());
 
-                if (isNaN(startDate)) {
+                if (isNaN(varStartDate)) {
                     $('.summary-item#start-date').addClass('error');
                     $('.summary-item#start-date').text('Not Selected!');
                 }
                 else {
                     $('.summary-item#start-date').removeClass('error');
-                    $('.summary-item#start-date').text(`From ${ordinalSuffix(startDate.getDate())} of ${MONTH_NAMES[startDate.getMonth()]} ${startDate.getFullYear()}`);
+                    $('.summary-item#start-date').text(`From ${ordinalSuffix(varStartDate.getDate())} of ${MONTH_NAMES[varStartDate.getMonth()]} ${varStartDate.getFullYear()}`);
                 }
 
-                if (isNaN(endDate)) {
+                if (isNaN(varEndDate)) {
                     $('.summary-item#end-date').addClass('error');
                     $('.summary-item#end-date').text('Not Selected!');
                 }
                 else {
                     $('.summary-item#end-date').removeClass('error');
-                    $('.summary-item#end-date').text(`To ${ordinalSuffix(endDate.getDate())} of ${MONTH_NAMES[endDate.getMonth()]} ${endDate.getFullYear()}`);
+                    $('.summary-item#end-date').text(`To ${ordinalSuffix(varEndDate.getDate())} of ${MONTH_NAMES[varEndDate.getMonth()]} ${varEndDate.getFullYear()}`);
                 }
 
                 //Check dates are in correct order (start before end).
-                if (!isNaN(startDate) && !isNaN(endDate)) {
+                if (!isNaN(varStartDate) && !isNaN(varEndDate)) {
                     const NORMAL_TEXT = `Selected Time Period`;
                     const ERROR_TEXT = `Selected Time Period - Error: Start and End dates are in wrong order`;
                     const DATA_EXTENT_TEXT = `Selected Time Period - Warning: No data stored past December 31st 2099`;
                     const DATA_EXTENT = new Date('2099-12-31');
 
-                    if (startDate > endDate) {
+                    if (varStartDate > varEndDate) {
                         $('.summary-item#date-title').addClass('error');
                         $('.summary-item#date-title').text(ERROR_TEXT);
                     }
-                    else if (startDate > DATA_EXTENT || endDate > DATA_EXTENT) {
+                    else if (varStartDate > DATA_EXTENT || varEndDate > DATA_EXTENT) {
                         $('.summary-item#date-title').addClass('warning');
                         $('.summary-item#date-title').text(DATA_EXTENT_TEXT);
                     }
@@ -281,6 +288,7 @@
             function updateSummaryPageTimeResolution() {
                 var name = $('select#time-resolution option:selected').text();      // Holds the name (Hourly, Daily, Monthly, Static).
                 var val = $('select#time-resolution').val();                        // Holds the value (1hr, day, mon, fx).
+                varTimeResolution = val;
                 $('.summary-item#time-resolution').text(`${name} (${val})`);
             }
 
@@ -300,6 +308,8 @@
                         `);
                     });
                 }
+
+                varVariables = $(".variable:checked").map(function(){return $(this).attr("short-name");}).get();
             }
 
             //Give a number and get it back with the ordinal suffix (st, nd, rd, or th).
