@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="css/bootstrap-grid.css">
         <script src="https://kit.fontawesome.com/1ada55961c.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <link rel="icon" href="img/favicon.png">
         
         <title>Climate Futures Data Portal</title>
@@ -81,23 +82,6 @@
                     })
                 });
 
-                $('.download-button').click(function() {
-                    //This will eventually download data from backend code but for now it generates an example file and opens a save dialog.
-                    var filename = "ExampleClimateDataFile.nc";
-                    var text = "Data goes here.";
-
-                    var element = document.createElement('a');
-                    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-                    element.setAttribute('download', filename);
-
-                    element.style.display = 'none';
-                    document.body.appendChild(element);
-
-                    element.click();
-
-                    document.body.removeChild(element);
-                });
-
                 $('#map-rectangle-button').click(function() {
                     $('#mapDiv button.esri-icon-checkbox-unchecked').click();
                 });
@@ -110,15 +94,45 @@
                     checkDatesValid();
                 });
 
+                function sleep(n){
+                    var request = new XMLHttpRequest();
+                    request.open('GET', '/sleep.php?n=' + n, false);  // `false` makes the request synchronous
+                    request.send(null);
+                }
+
                 /* Ajax use POST method for Download Function */
                 $('.download-button').click(function () {
+                    //This will eventually download data from backend code but for now it generates an example file and opens a save dialog.
+                    /*var filename = "ExampleClimateDataFile.nc";
+                    var text = "Data goes here.";
+
+                    var element = document.createElement('a');
+                    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+                    element.setAttribute('download', filename);
+
+                    element.style.display = 'none';
+                    document.body.appendChild(element);
+
+                    element.click();
+
+                    document.body.removeChild(element);*/
+                    
+                    $('#download-modal .loading-content').show();
+                    $('#download-modal .results-content').hide();
+                    $('#download-modal').modal('show');
+
                     var area;
                     var variables = $('.variable:checked');
                     var stime = new Date($('input#start-date').val());
                     var etime = new Date($('input#end-date').val());
                     var ensemble_members = $('#step2-options select option:selected').text();
 
-                    $.ajax({
+                    setTimeout(() => {  
+                        $('#download-modal .loading-content').hide();
+                        $('#download-modal .results-content').show();
+                    }, 2500);
+
+                    /*$.ajax({
                         url: 'des.jsp',
                         type: 'POST',
                         traditional: true,
@@ -136,7 +150,7 @@
                         error: function () {
                             alert("Something Wrong");
                         }
-                    });
+                    });*/
                 });
             });
 
@@ -333,6 +347,76 @@
         </script>
     </head>
     <body>
+        <!-- Download popup modal -->
+        <div class="modal fade" id="download-modal" tabindex="-1" role="dialog" aria-labelledby="download-modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="download-modal-long-title">Download Data</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="loading-content text-center">
+                            <div class="loading-spinner"></div>
+                            <p class="loading-text">Loading...</p>
+                        </div>
+                        <div class="results-content">
+                            <!-- <ul class="nav nav-tabs">
+                                <li class="results-tab nav-item" time-res="1hr">
+                                <a class="nav-link active" href="#">Hourly</a>
+                                </li>
+                                <li class="results-tab nav-item" time-res="day">
+                                <a class="nav-link" href="#">Daily</a>
+                                </li>
+                                <li class="results-tab nav-item" time-res="mon">
+                                <a class="nav-link" href="#">Monthly</a>
+                                </li>
+                                <li class="results-tab nav-item" time-res="fx">
+                                <a class="nav-link" href="#">Static</a>
+                                </li>
+                            </ul> -->
+
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-1hr-tab" data-toggle="tab" href="#nav-1hr" role="tab" aria-controls="nav-1hr" aria-selected="true">Hourly</a>
+                                <a class="nav-item nav-link" id="nav-day-tab" data-toggle="tab" href="#nav-day" role="tab" aria-controls="nav-day" aria-selected="false">Daily</a>
+                                <a class="nav-item nav-link" id="nav-mon-tab" data-toggle="tab" href="#nav-mon" role="tab" aria-controls="nav-mon" aria-selected="false">Monthly</a>
+                                <a class="nav-item nav-link" id="nav-fx-tab" data-toggle="tab" href="#nav-fx" role="tab" aria-controls="nav-fx" aria-selected="false">Static</a>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent" style="margin-top:25px;">
+                                <div class="tab-pane fade show active" id="nav-1hr" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <ul class="results-list 1hr">
+                                        <li>No Results</li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="nav-day" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                    <ul class="results-list day">
+                                        <li>No Results</li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="nav-mon" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                    <ul class="results-list mon">
+                                        <li>No Results</li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="nav-fx" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                    <ul class="results-list fx">
+                                        <li>No Results</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container-fluid content-stretcher">
 
             <!-- Header. Contains ClimateFutures logo and tagline. Hidden on sizes lower than lg. -->
