@@ -117,15 +117,26 @@
 
                     document.body.removeChild(element);*/
                     
-                    $('#download-modal .loading-content').show();
-                    $('#download-modal .results-content').hide();
-                    $('#download-modal').modal('show');
-
                     var area;
                     var variables = $('.variable:checked');
                     var stime = new Date($('input#start-date').val());
                     var etime = new Date($('input#end-date').val());
                     var ensemble_members = $('#step2-options select option:selected').text();
+
+                    $('#download-modal .loading-content').show();
+                    $('#download-modal .results-content').hide();
+                    $('#download-modal').modal('show');
+                    $(`#nav-${varTimeResolution}-tab`).click(); //Automatically select the tab that the user selected as time resolution.
+
+                    var hrResults = Math.floor(Math.random() * 50),
+                        dayResults = Math.floor(Math.random() * 50),
+                        monResults = Math.floor(Math.random() * 50),
+                        fxResults = Math.floor(Math.random() * 50);
+
+                    $('#nav-1hr-tab').text(`Hourly (${hrResults})`);
+                    $('#nav-day-tab').text(`Daily (${dayResults})`);
+                    $('#nav-mon-tab').text(`Monthly (${monResults})`);
+                    $('#nav-fx-tab').text(`Static (${fxResults})`);
 
                     setTimeout(() => {  
                         $('#download-modal .loading-content').hide();
@@ -363,21 +374,6 @@
                             <p class="loading-text">Loading...</p>
                         </div>
                         <div class="results-content">
-                            <!-- <ul class="nav nav-tabs">
-                                <li class="results-tab nav-item" time-res="1hr">
-                                <a class="nav-link active" href="#">Hourly</a>
-                                </li>
-                                <li class="results-tab nav-item" time-res="day">
-                                <a class="nav-link" href="#">Daily</a>
-                                </li>
-                                <li class="results-tab nav-item" time-res="mon">
-                                <a class="nav-link" href="#">Monthly</a>
-                                </li>
-                                <li class="results-tab nav-item" time-res="fx">
-                                <a class="nav-link" href="#">Static</a>
-                                </li>
-                            </ul> -->
-
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-1hr-tab" data-toggle="tab" href="#nav-1hr" role="tab" aria-controls="nav-1hr" aria-selected="true">Hourly</a>
