@@ -137,6 +137,7 @@
                     $.ajax({
                         url: 'http://144.6.227.194:8081/climatefutures/query',
                         type: 'POST',
+                        dataType: 'json',
                         contentType: 'application/json',
                         data: JSON.stringify({
                             start_date: "02/10/2010",
@@ -161,6 +162,7 @@
                     /*$.ajax({
                         url: 'http://144.6.227.194:8081/climatefutures/query',
                         type: 'POST',
+                        dataType: 'json',
                         contentType: 'application/json',
                         data: JSON.stringify({
                             start_date: varStartDateFormatted,
