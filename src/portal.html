@@ -117,53 +117,156 @@
 
                     document.body.removeChild(element);*/
                     
-                    var area;
-                    var variables = $('.variable:checked');
-                    var stime = new Date($('input#start-date').val());
-                    var etime = new Date($('input#end-date').val());
-                    var ensemble_members = $('#step2-options select option:selected').text();
+                    varVariablesFormatted = varVariables.join(", ");
+                    varStartDateFormatted = `${varStartDate.getDate()}/${varStartDate.getMonth() + 1}/${varStartDate.getFullYear()}`;
+                    varEndDateFormatted = `${varEndDate.getDate()}/${varEndDate.getMonth() + 1}/${varEndDate.getFullYear()}`;
+
+                    //var ensemble_members = $('#step2-options select option:selected').text();
 
                     $('#download-modal .loading-content').show();
                     $('#download-modal .results-content').hide();
                     $('#download-modal').modal('show');
                     $(`#nav-${varTimeResolution}-tab`).click(); //Automatically select the tab that the user selected as time resolution.
 
-                    var hrResults = Math.floor(Math.random() * 50),
-                        dayResults = Math.floor(Math.random() * 50),
-                        monResults = Math.floor(Math.random() * 50),
-                        fxResults = Math.floor(Math.random() * 50);
-
-                    $('#nav-1hr-tab').text(`Hourly (${hrResults})`);
-                    $('#nav-day-tab').text(`Daily (${dayResults})`);
-                    $('#nav-mon-tab').text(`Monthly (${monResults})`);
-                    $('#nav-fx-tab').text(`Static (${fxResults})`);
-
-                    setTimeout(() => {  
+                    /*setTimeout(() => {  
                         $('#download-modal .loading-content').hide();
                         $('#download-modal .results-content').show();
-                    }, 2500);
+                    }, 2500);*/
 
-                    /*$.ajax({
-                        url: 'des.jsp',
+                    //Example request, works perfect.
+                    $.ajax({
+                        url: 'http://144.6.227.194:8081/climatefutures/query',
                         type: 'POST',
-                        traditional: true,
-                        data: {
+                        contentType: 'application/json',
+                        data: JSON.stringify({
                             start_date: "02/10/2010",
                             end_date: "02/10/2020",
                             bounds: [[144.208, 146.724], [-42.842, -41.301]],
                             variable: "prc",
                             ensemble_member: "CSIRO-BOM-ACCESS1-0",
                             emission: "rcp85"
-                        },
+                        }),
                         success: function (data,status) {
-                            alert(data + status);
+                            //debugger;
+                            //alert(data + status);
+                            updateDownloadResults(data);
                         },
-                        error: function () {
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            debugger;
+                            alert("Something Wrong");
+                        }
+                    });
+
+                    //Request that actually uses set filters.                    /*$.ajax({
+                        url: 'http://144.6.227.194:8081/climatefutures/query',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            start_date: varStartDateFormatted,
+                            end_date: varEndDateFormatted,
+                            bounds: [[varMinLong, varMaxLong], [varMinLat, varMaxLat]],
+                            variable: varVariablesFormatted,
+                            ensemble_member: "CSIRO-BOM-ACCESS1-0",
+                            emission: "rcp85"
+                        }),
+                        success: function (data,status) {
+                            //debugger;
+                            //alert(data + status);
+                            updateDownloadResults(data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            debugger;
                             alert("Something Wrong");
                         }
                     });*/
                 });
             });
+
+            var downloadsList = [];
+
+            function updateDownloadResults(data) {
+                downloadsList = [];
+                traverse(data); //full downloadsList with a 1d list full of all the links.
+                
+                $('.results-list').empty();
+                const LINK_PREFIX = "http://144.6.227.194:8080/thredds/fileServer/climatefutures/";
+
+                /*var fileSizes = [downloadsList.length];
+                var fileSizeRequests = [downloadsList.length]
+
+                const BYTE_TO_MB = 0.000001;
+
+                for (var i = 0; i < downloadsList.length; i++)
+                {
+                    fileSizeRequests[i] = $.ajax({
+                        type: "HEAD",
+                        url: downloadsList[i],
+                        success: function(msg) {
+                            fileSizes[i] = Math.ceil(parseInt(xhr.getResponseHeader('Content-Length')) * BYTE_TO_MB);
+                        },
+                        error: function(msg) {
+                            filesizes[i] = 0;
+                        }
+                    });
+                }*/
+
+                var hrResults = 0,
+                    dayResults = 0,
+                    monResults = 0,
+                    fxResults = 0,
+                    otherResults = 0;
+
+                //${fileSizes[i] != 0 ? `(${fileSizes[i]})` : ``}
+
+                for (var i = 0; i < downloadsList.length; i++)
+                {
+                    if (downloadsList[i].includes("/1hr/")) {
+                        $('.results-list.1hr').append(`<li><a href="${downloadsList[i]}">${downloadsList[i].substring(downloadsList[i].lastIndexOf('/') + 1)} </a></li>`);
+                        hrResults++;
+                    }
+                    else if (downloadsList[i].includes("/day/")) {
+                        $('.results-list.day').append(`<li><a href="${downloadsList[i]}">${downloadsList[i].substring(downloadsList[i].lastIndexOf('/') + 1)}</a></li>`);
+                        dayResults++;
+                    }
+                    else if (downloadsList[i].includes("/mon/")) {
+                        $('.results-list.mon').append(`<li><a href="${downloadsList[i]}">${downloadsList[i].substring(downloadsList[i].lastIndexOf('/') + 1)}</a></li>`);
+                        monResults++;
+                    }
+                    else if (downloadsList[i].includes("/fx/")) {
+                        $('.results-list.fx').append(`<li><a href="${downloadsList[i]}">${downloadsList[i].substring(downloadsList[i].lastIndexOf('/') + 1)}</a></li>`);
+                        fxResults++;
+                    }
+                    else {
+                        $('.results-list.other').append(`<li><a href="${downloadsList[i]}">${downloadsList[i].substring(downloadsList[i].lastIndexOf('/') + 1)}</a></li>`);
+                        otherResults++;
+                    }
+                }
+
+                $(".results-list:not(:has(*))").append(`<li>No Results</li>`);
+
+                //Update tab counts.
+                $('#nav-1hr-tab').text(`Hourly (${hrResults})`);
+                $('#nav-day-tab').text(`Daily (${dayResults})`);
+                $('#nav-mon-tab').text(`Monthly (${monResults})`);
+                $('#nav-fx-tab').text(`Static (${fxResults})`);
+                $('#nav-other-tab').text(`Other (${otherResults})`);
+
+                //Hide loading and show results.
+                $('#download-modal .loading-content').hide();
+                $('#download-modal .results-content').show();
+            }
+
+            function traverse(o) {
+                for (var i in o) {
+                    if (o[i] !== null && typeof(o[i]) == "object") {
+                        //going one step down in the object tree!!
+                        traverse(o[i]);
+                    }
+                    else if (typeof(o[i]) == "string") {
+                        downloadsList.push(o[i]);
+                    }
+                }
+            }
 
             function checkDatesValid() {
                 var startDate = $('#start-date').val();
@@ -364,6 +467,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="download-modal-long-title">Download Data</h5>
+                        <p style="color: red;">THIS IS A TEST DOWNLOAD, YOUR FILTERS WERE IGNORED.</p>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -371,15 +475,16 @@
                     <div class="modal-body">
                         <div class="loading-content text-center">
                             <div class="loading-spinner"></div>
-                            <p class="loading-text">Loading...</p>
+                            <p class="loading-text">Loading... This can take a while.</p>
                         </div>
                         <div class="results-content">
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-1hr-tab" data-toggle="tab" href="#nav-1hr" role="tab" aria-controls="nav-1hr" aria-selected="true">Hourly</a>
-                                <a class="nav-item nav-link" id="nav-day-tab" data-toggle="tab" href="#nav-day" role="tab" aria-controls="nav-day" aria-selected="false">Daily</a>
-                                <a class="nav-item nav-link" id="nav-mon-tab" data-toggle="tab" href="#nav-mon" role="tab" aria-controls="nav-mon" aria-selected="false">Monthly</a>
-                                <a class="nav-item nav-link" id="nav-fx-tab" data-toggle="tab" href="#nav-fx" role="tab" aria-controls="nav-fx" aria-selected="false">Static</a>
+                                    <a class="nav-item nav-link active" id="nav-1hr-tab" data-toggle="tab" href="#nav-1hr" role="tab" aria-controls="nav-1hr" aria-selected="true">Hourly</a>
+                                    <a class="nav-item nav-link" id="nav-day-tab" data-toggle="tab" href="#nav-day" role="tab" aria-controls="nav-day" aria-selected="false">Daily</a>
+                                    <a class="nav-item nav-link" id="nav-mon-tab" data-toggle="tab" href="#nav-mon" role="tab" aria-controls="nav-mon" aria-selected="false">Monthly</a>
+                                    <a class="nav-item nav-link" id="nav-fx-tab" data-toggle="tab" href="#nav-fx" role="tab" aria-controls="nav-fx" aria-selected="false">Static</a>
+                                    <a class="nav-item nav-link" id="nav-other-tab" data-toggle="tab" href="#nav-other" role="tab" aria-controls="nav-other" aria-selected="false">Other</a>
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent" style="margin-top:25px;">
@@ -400,6 +505,11 @@
                                 </div>
                                 <div class="tab-pane fade" id="nav-fx" role="tabpanel" aria-labelledby="nav-contact-tab">
                                     <ul class="results-list fx">
+                                        <li>No Results</li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="nav-other" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                    <ul class="results-list other">
                                         <li>No Results</li>
                                     </ul>
                                 </div>
