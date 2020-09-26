@@ -21,7 +21,7 @@
             <script src="https://js.arcgis.com/4.15/"></script>
 
             <!-- Import Custom Map Setup Javascript. -->
-            <script src="components/map.js"></script>
+            <script src="js/map.js"></script>
         <!-- End Map Imports -->
 
         <script>
@@ -102,21 +102,6 @@
 
                 /* Ajax use POST method for Download Function */
                 $('.download-button').click(function () {
-                    //This will eventually download data from backend code but for now it generates an example file and opens a save dialog.
-                    /*var filename = "ExampleClimateDataFile.nc";
-                    var text = "Data goes here.";
-
-                    var element = document.createElement('a');
-                    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-                    element.setAttribute('download', filename);
-
-                    element.style.display = 'none';
-                    document.body.appendChild(element);
-
-                    element.click();
-
-                    document.body.removeChild(element);*/
-                    
                     varVariablesFormatted = varVariables.join(", ");
                     varStartDateFormatted = `${varStartDate.getDate()}/${varStartDate.getMonth() + 1}/${varStartDate.getFullYear()}`;
                     varEndDateFormatted = `${varEndDate.getDate()}/${varEndDate.getMonth() + 1}/${varEndDate.getFullYear()}`;
@@ -127,11 +112,6 @@
                     $('#download-modal .results-content').hide();
                     $('#download-modal').modal('show');
                     $(`#nav-${varTimeResolution}-tab`).click(); //Automatically select the tab that the user selected as time resolution.
-
-                    /*setTimeout(() => {  
-                        $('#download-modal .loading-content').hide();
-                        $('#download-modal .results-content').show();
-                    }, 2500);*/
 
                     //Example request, works perfect.
                     $.ajax({
