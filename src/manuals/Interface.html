@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h><b>Knowing the user interface</b></h>
-    <p>
-     Introduction of the interface of the application.
-    </p>
-<ul>
-<li>
-    Area Selection
-</li>
-<p>
-This area contains the section where you can proceed your location selection for data extraction. 
-It contains a map API from ArcGIS and functionality the team implements to help you choose area of your choice, 
-by marking with square. 
-</p>
-<img alt="variable" src="img/Area_selection.JPG"/>
-<br><br/>
-<li>
-    Time & Variable Selection
-</li>
-<p>
-    After having chosen your desired location for data extraction, 
-    you can then proceed to choose time period and variables.
-    Time period contains a timespan of 2 checkpoint. 
-    There are over a hundred variables to choose from so you can use the search functionality to search for your desired variables.
-</p>
-<img alt="variable" src="img/Time_variable.JPG"/>
-<br><br/>
-<li>
-    Summary & Download
-</li>
-<p>
-    This area contains the information about your downloads. 
-    It sums up your chosen area by geographical degree and the timespan.    
-</p>
-<img alt="variable" src="img/summary_download.JPG"/>
-<br><br/>
-<li>
-    Steps system
-</li>
-<br><br/>
-<img alt="variable" src="img/step_system.jpg"/>
-<p>
-    First of all, in the Climate futures data portal home page you need to select any particular area through map selection option by choosing rectangle, radius or polygon. 
-    After selecting the map area you can follow up to the time and variables page by clicking next step. In this page, You need to select a time period according to your desirable need. 
-    At this page, You also need to select multiple variables like humidity and temperature, wind direction or select any other variables by navigating ‘search variables tab” on the top right corner of the page. 
-    After selecting the required items you can follow through our final page ‘Download page” by select ‘next step option’. 
-    In this page, You can see the summary of your data selection process. If you want to make any kind of change in this selection process you can go back to the 
-    previous pages by clicking “’previous step’ option at the bottom left corner of the page, On the other hand.
-    if you are satisfied with your selection summary you can download the data by clicking ‘download ‘ option on the right bottom corner of the page.     
-</p>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <h1>The Interface</h1>
+        <p>
+            First of all, in the Climate futures data portal home page you need to select any particular area through map selection option by choosing rectangle, radius or polygon. 
+            After selecting the map area you can follow up to the time and variables page by clicking next step. In this page, You need to select a time period according to your desirable need. 
+            At this page, You also need to select multiple variables like humidity and temperature, wind direction or select any other variables by navigating ‘search variables tab” on the top right corner of the page. 
+            After selecting the required items you can follow through our final page ‘Download page” by select ‘next step option’. 
+            In this page, You can see the summary of your data selection process. If you want to make any kind of change in this selection process you can go back to the 
+            previous pages by clicking “’previous step’ option at the bottom left corner of the page, On the other hand.
+            if you are satisfied with your selection summary you can download the data by clicking ‘download ‘ option on the right bottom corner of the page.     
+        </p>
+        <ul>
+            <li>
+                <h4>Steps system</h4>  
+                <p>
+                    The data portal interface is broken up into seperate "steps" interfaces, these can be accessed by clicking the steps "strip" across the top of the screen or 
+                    accessing the previous/next step buttons at the bottom of the screen (these buttons will only be displayed if your screen size is large enough).
+                </p>
+                <img alt="The steps strip" src="img/step_system.jpg"/>
+                <br/>
+                <img alt="Step back and forth buttons" src="img/steps-back-forth-buttons.png" height="60px"/>
+            </li>
+            <li>
+                <h4>Area Selection</h4>
+                <p>
+                    This interface consists of an interactive map allowing visual selection of the desired data extraction area.
+                </p>
+                <img alt="Map area selection" src="img/Area_selection.JPG"/>
+            </li>
+            <li>
+                <h4>Time & Variable Selection</h4>
+                <p>The Time & Variables interface allows for selection of the desired time period and variables of data.</p>
+                <p>Time reoltuion selection specifies the desired record frequency of the found files, but when downloading is performed files of all time resoltions are presented.</p>
+                <img alt="Variable selection" src="img/Time_variable.JPG"/>
+            </li>
+
+            <!-- Break this section into seperate summary page and download modal serctions. -->
+            <li>
+                <h4>Summary & Download</h4>
+            
+                <p>
+                    This popup area lists the found files that contain climate data matching your set filters.
+                    Retrieved files are sorted into tabs by time resolution, allowing you to check other results.
+                    The time resolution chosen in step 2 will be the default open tab when this popup is opened.
+                </p>
+                <img alt="Download results popup" src="img/summary_download.JPG"/>
+            </li>
+        </ul>
+    </body>
 </html>
