@@ -106,10 +106,13 @@
                     //Check that all variables have been defined, if not then alert the user and stop this method
                     var variables = [];
                     variables.push(varMinLat, varMaxLat, varMinLong, varMaxLong, varStartDate, varEndDate, varTimeResolution, varVariables);
-                    if (variables.includes(null) || variables.includes(undefined))    
+                    for (var i = 0; i < variables.length; i++)
                     {
-                        alert(`You must set all filters: Area, Start/End dates & Variables before being able to download.`);
-                        return;
+                        if (variables[i].includes(null) || variables[i].includes(undefined) || isNaN(variables[i]))
+                        {
+                            alert(`You must set all filters: Area, Start/End dates & Variables before being able to download.`);
+                            return;
+                        }
                     }
 
                     varVariablesFormatted = varVariables.join(", ");
