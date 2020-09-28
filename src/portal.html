@@ -107,9 +107,9 @@
                     var variables = [];
                     variables.push(varMinLat, varMaxLat, varMinLong, varMaxLong, varTimeResolution);//, varVariables);//, varStartDate, varEndDate);
 
-                    if (variables.length == 0)  //Check variables count.
+                    if (variables.includes(null) || variables.includes(undefined))// || isNaN(variables[i]))
                     {
-                        alert(`You must set select atleast 1 variable before being able to download.`);
+                        alert(`You must select an area in step 1 before being able to download.`);
                         return;
                     }
 
@@ -119,9 +119,9 @@
                         return;
                     }
 
-                    if (variables.includes(null) || variables.includes(undefined))// || isNaN(variables[i]))
+                    if (varVariables.length == 0)  //Check variables count.
                     {
-                        alert(`You must select an area in step 1 before being able to download.`);
+                        alert(`You must set select atleast 1 variable before being able to download.`);
                         return;
                     }
 
