@@ -105,17 +105,23 @@
 
                     //Check that all variables have been defined, if not then alert the user and stop this method
                     var variables = [];
-                    variables.push(varMinLat, varMaxLat, varMinLong, varMaxLong, varTimeResolution, varVariables);//, varStartDate, varEndDate);
+                    variables.push(varMinLat, varMaxLat, varMinLong, varMaxLong, varTimeResolution);//, varVariables);//, varStartDate, varEndDate);
+
+                    if (variables.length == 0)  //Check variables count.
+                    {
+                        alert(`You must set select atleast 1 variable before being able to download.`);
+                        return;
+                    }
 
                     if (isNaN(varStartDate) || isNaN(varEndDate))   //Check start and end dates seperately with isNaN.
                     {
-                        alert(`You must set all filters: Area, Start/End dates & Variables before being able to download.`);
-                            return;
+                        alert(`You must set start and end date filters before being able to download.`);
+                        return;
                     }
 
                     if (variables.includes(null) || variables.includes(undefined))// || isNaN(variables[i]))
                     {
-                        alert(`You must set all filters: Area, Start/End dates & Variables before being able to download.`);
+                        alert(`You must select an area in step 1 before being able to download.`);
                         return;
                     }
 
