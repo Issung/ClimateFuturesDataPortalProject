@@ -108,7 +108,7 @@
                     variables.push(varMinLat, varMaxLat, varMinLong, varMaxLong, varStartDate, varEndDate, varTimeResolution, varVariables);
                     for (var i = 0; i < variables.length; i++)
                     {
-                        if (variables[i].includes(null) || variables[i].includes(undefined) || isNaN(variables[i]))
+                        if (variables[i] == null || variables[i] == undefined || isNaN(variables[i]))
                         {
                             alert(`You must set all filters: Area, Start/End dates & Variables before being able to download.`);
                             return;
