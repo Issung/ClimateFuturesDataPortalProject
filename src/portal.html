@@ -125,7 +125,6 @@
                         return;
                     }
 
-                    varVariablesFormatted = varVariables.join(", ");
                     varStartDateFormatted = `${varStartDate.getDate()}/${varStartDate.getMonth() + 1}/${varStartDate.getFullYear()}`;
                     varEndDateFormatted = `${varEndDate.getDate()}/${varEndDate.getMonth() + 1}/${varEndDate.getFullYear()}`;
 
@@ -137,7 +136,7 @@
                     $(`#nav-${varTimeResolution}-tab`).click(); //Automatically select the tab that the user selected as time resolution.
 
                     //Example request, works perfect.
-                    $.ajax({
+                    /*$.ajax({
                         url: 'http://144.6.227.194:8081/climatefutures/query',
                         type: 'POST',
                         dataType: 'json',
@@ -159,10 +158,10 @@
                             debugger;
                             alert("Something Wrong");
                         }
-                    });
+                    });*/
 
                     //Request that actually uses set filters.                    
-                    /*$.ajax({
+                    $.ajax({
                         url: 'http://144.6.227.194:8081/climatefutures/query',
                         type: 'POST',
                         dataType: 'json',
@@ -171,7 +170,7 @@
                             start_date: varStartDateFormatted,
                             end_date: varEndDateFormatted,
                             bounds: [[varMinLong, varMaxLong], [varMinLat, varMaxLat]],
-                            variable: varVariablesFormatted,
+                            variable: varVariables,
                             ensemble_member: "CSIRO-BOM-ACCESS1-0",
                             emission: "rcp85"
                         }),
@@ -184,7 +183,7 @@
                             debugger;
                             alert("Something Wrong");
                         }
-                    });*/
+                    });
                 });
             });
 
