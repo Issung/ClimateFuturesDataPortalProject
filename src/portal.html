@@ -380,14 +380,14 @@
                         }
                     }
     
-                    varMinLat = Math.min(...lats).toFixed(3);
-                    varMaxLat = Math.max(...lats).toFixed(3);
-                    varMinLong = Math.min(...longs).toFixed(3);
-                    varMaxLong = Math.max(...longs).toFixed(3);
+                    varMinLat = Math.min(...lats);
+                    varMaxLat = Math.max(...lats);
+                    varMinLong = Math.min(...longs);
+                    varMaxLong = Math.max(...longs);
 
                     //$('.summary-item#selected-area').text('Rectangle, 52.3ha (WIP)');
                     $('.summary-item#selected-area').removeClass('error');
-                    $('.summary-item#selected-area').text(`Rectangle, Latitude: ${varMinLat} to ${varMaxLat}, Longitude: ${varMinLong} to ${varMaxLong}`);
+                    $('.summary-item#selected-area').text(`Rectangle, Latitude: ${varMinLat.toFixed(3)} to ${varMaxLat.toFixed(3)}, Longitude: ${varMinLong.toFixed(3)} to ${varMaxLong.toFixed(3)}`);
                 }
             }
 
