@@ -5,7 +5,7 @@
 
 #steps {
     background-color: #1C5A75;
-    min-height: 50px;
+    /* min-height: 50px; */ /* Was causing steps to overlap onto options area on sm width. */
     line-height: 45px;
 }
 
