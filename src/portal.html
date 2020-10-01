@@ -90,6 +90,7 @@
 
                 $('#start-date').change(function() {
                     checkDatesValid();
+                    $('#end-date').attr('value',$('#start-date').val());
                 });
 
                 $('#end-date').change(function() {
@@ -379,10 +380,10 @@
                         }
                     }
     
-                    varMinLat = Math.min(...lats);
-                    varMaxLat = Math.max(...lats);
-                    varMinLong = Math.min(...longs);
-                    varMaxLong = Math.max(...longs);
+                    varMinLat = Math.min(...lats).toFixed(3);
+                    varMaxLat = Math.max(...lats).toFixed(3);
+                    varMinLong = Math.min(...longs).toFixed(3);
+                    varMaxLong = Math.max(...longs).toFixed(3);
 
                     //$('.summary-item#selected-area').text('Rectangle, 52.3ha (WIP)');
                     $('.summary-item#selected-area').removeClass('error');

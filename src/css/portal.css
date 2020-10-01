@@ -340,6 +340,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: rgba(110,110,110,0.4) !important;
 }
 
+#map-controls .esri-sketch__button--selected {
+    background-color: white !important;
+    color: grey!important;
+}
+
+#map-controls button[title="Transform"] {
+    pointer-events: none;
+}
+
 #map-controls button[title="Reshape"] {
     display: none;
 }
