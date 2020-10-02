@@ -15,7 +15,7 @@
             This window area contains the interactive map that illustrates the surface of the earth, looking from satelite. The map is provided by the arcGIS map API. Below is an overview of the interactive map window.
         </p>
 
-        <img alt = "map_api" src = "img/map-api.png" style = "width:1200px;height: 550px">
+        <img alt="map_api" src="img/map-api.png" style="width:1200px;height:550px">
 
         <h2>Places of interest</h2>
         <p>This section will outline the specific details of important signs, texts and features that you should pay    
@@ -25,28 +25,33 @@
         <ul>
             <li>
                 <h3>Toolbox</h3>
-                <img alt = "toolbox" src = "img/toolbox.jpg">
+                <img alt="spatial_extent" src="img/spatial-extent.jpg">
                 <p>This box contains all of the actions you can take when using the interactive map. The contents of the box are as followed:
+
+                <!--will be opted to a one pic answer all in the future-->    
                 <ul style = "list-style-type: none;">                   
                     <li>
-                        <img alt = "transform_button" src = "img/transform-button.JPG">   
+                        <img alt="transform_button" src="img/transform-button.png" style="width:90px;height:45px">   
                         Transform
-
                     </li>
                     <li>
-                        <img alt = "draw_rectangle" src = "img/draw-rectangle.png">   
+                        <img alt="draw_rectangle" src="img/draw-rectangle.png" style="width:90px;height:45px">   
                         Draw rentangle
                     </li>
                     <li>
-                        <img alt = "undo_&_redo" src = "img/undo-and-redo.JPG">
-                        Undo & Redo
+                        <img alt="undo" src="img/undo.png" style="width:90px;height:45px">
+                        Undo
                     </li>
                     <li>
-                        <img alt = "delete" src = "img/delete.JPG">
+                        <img alt="redo" src="img/redo.png" style="width:90px;height:45px">
+                        Redo
+                    </li>                    
+                    <li>
+                        <img alt="delete" src="img/delete.png" style="width:90px;height:45px">
                         Delete
                     </li>
                     <li>
-                        <img alt = "status_box" src = "img/status-box.JPG">
+                        <img alt="status_box" src="img/status-box.png" style="width:90px;height:45px">
                         Status box
                     </li>   
                 </ul> 
@@ -55,13 +60,16 @@
 
             <li>
                 <h3>Longtitude and latitude</h3>
-                <img alt = "long_and_lat" src = "img/long-and-lat.png">
+                <img alt="long_and_lat" src="img/long-and-lat.png">
                 <p>In this example, the longtitude is -171.868 and the latitude is -44.127</p>
             </li>
 
             <li>
                 <h3>Zooming buttons</h3>
-                <img alt = "zooming_buttons" src = "img/gif/zooming-buttons.gif" style = "width:800px;">
+                <video width="800" controls>
+                    <source src="img/gif/zooming-buttons.webm" type="video/webm">
+                    Your browser does not support <i>webm</i> video type
+                </video>                
                 <p>You can zoom in the application by pressing the "+" button, and zoom out by pressing the "-" button</p>
             </li> 
         </ul>
@@ -70,7 +78,53 @@
         <p>
             This section will guide towards how to draw the bounding box which will contain the coordination to extract data from the map.
         </p>
-        <p><b>Step 1</b> - Choose the <b>Draw Rectangle</b> option</p>
-        <img alt = "rectangular_button" src = "img/gif/area-selection.gif" style = "width:800px;">
+        <ul>
+            <li>
+                <p>
+                    <i>Step 1</i> - Choose the <b>Draw Rectangle</b> option
+                </p>
+                <video width="800" controls>
+                    <source src="img/gif/choose-rectangle-button.webm" type="video/webm">
+                    Your browser does not support <i>webm</i> video type
+                </video>
+            </li>
+            <li>
+                <p>
+                    <i>Step 2</i> - Hold your left mouse button, drag and drop to draw a rectangular shape. This shape will contain your desired location for extraction.
+                    <br>
+                    In this example, Tasmania has been selected.
+                </p>.
+                <video width="800" controls>
+                    <source src="img/gif/hold-and-drag.webm" type="video/webm">
+                    Your browser does not support <i>webm</i> video type
+                </video>                    
+            </li>
+            <li>
+                <p><i>Step 3</i> - The following are addtional actions you can take to customise your previously drawn rectangle</p>
+                <ul>
+                    <li>
+                        <p>Dragging and dropping your drawn rectangle to other places on the map</p>
+                        <video width="800" controls>
+                            <source src="img/gif/drag-and-drop.webm" type="video/webm">
+                            Your browser does not support <i>webm</i> video type
+                        </video>                     
+                    </li>
+                    <li>
+                        <p>Undoing and redoing your actions</p>
+                        <video width="800" controls>
+                            <source src="img/gif/undoing-and-redoing.webm" type="video/webm">
+                            Your browser does not support <i>webm</i> video type
+                        </video>                     
+                    </li>
+                    <li>
+                        <p>Deleting selected bounding box</p>
+                        <video width="800" controls>
+                            <source src="img/gif/delete-selected-box.webm" type="video/webm">
+                            Your browser does not support <i>webm</i> video type
+                        </video>                     
+                    </li>                                            
+                </ul>
+            </li>
+        </ul>
     </body>
 </html>
