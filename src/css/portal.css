@@ -160,10 +160,21 @@
 }
 
 /* Float selects (drop down lists) to the bottom of option boxes and make them stretch to width too. */
-#options-container .options .box select {
+#options-container .options .box .float-bottom {
     width: calc(100% - 40px);
     position: absolute;
     bottom: 15px;
+}
+
+@media only screen and (min-width: 992px) {
+
+    /* Little rule that applies the rules of .float-bottom but only on md or larger screens.
+        Used for ensemble and emission <select>'s as on sizes below medium float-bottom makes them override their titles. */
+    #options-container .options .box .md-float-bottom {
+        width: calc(100% - 40px);
+        position: absolute;
+        bottom: 15px;
+    }
 }
 
 #content-container {
