@@ -9,15 +9,16 @@ require([
     "dojo/dom",
     "esri/geometry/support/webMercatorUtils",
     "esri/widgets/Sketch",
-    "esri/layers/GraphicsLayer"
-], function(Map, MapView, dom, webMercatorUtils, Sketch, GraphicsLayer) {
+    "esri/layers/GraphicsLayer",
+    "esri/widgets/BasemapToggle"
+], function(Map, MapView, dom, webMercatorUtils, Sketch, GraphicsLayer, BasemapToggle) {
     const layer = new GraphicsLayer();
 
     wbmu = webMercatorUtils;
     
     // More basemaps here: https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
     map = new Map({
-        basemap: "satellite",
+        basemap: "hybrid",
         layers: [layer]
     });
 
@@ -27,6 +28,15 @@ require([
         zoom: 7,
         center: [146.4, -41.7] // longitude, latitude
     });
+
+    //https://developers.arcgis.com/javascript/latest/sample-code/intro-widgets/index.html 
+    var toggle = new BasemapToggle({
+        // 2 - Set properties
+        view: view, // view that provides access to the map's 'topo-vector' basemap
+        nextBasemap: "topo-vector" // allows for toggling to the 'hybrid' basemap
+    });
+
+    view.ui.add(toggle, "top-right");
 
     sketch = new Sketch({
         layer: layer,

@@ -101,7 +101,7 @@
 }
 
 #options-container {
-    padding: 20px;
+    padding: 20px 0px 20px 0px;
     background-color: #3E4E60;
     -webkit-box-shadow: inset -1px 190px 38px -200px rgba(0,0,0,0.75);
     -moz-box-shadow: inset -1px 190px 38px -200px rgba(0,0,0,0.75);
@@ -120,10 +120,14 @@
     padding: 15px 20px 15px 20px;
     background-color: #C86442;
     border-radius: 5px;
-    margin-right: 25px;
+    /* margin-right: 15px; */
     -webkit-box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
     box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
+}
+
+#options-container .options .box>.col-12 {
+    padding-left: 0px;
 }
 
 #options-container .options .box h3{
@@ -132,13 +136,25 @@
 
 #options-container .options .box * {
     /* padding-bottom: 5px; */
-    width: 100%;
+    /* width: 100%; */
     border-radius:5px;
+}
+
+.esri-sketch__panel * {
+    width: 100% !important;
+}
+
+#options-container .options .box select {
+    /* bottom:15px;
+    position:absolute;
+    width:calc(100% - 40px) !important; */
 }
 
 #options-container .options .box input,
 #options-container .options .box select {
+    border: 1px solid rgb(118, 118, 118);
     height: 35px;
+    width:100%;
 }
 
 #content-container {
@@ -214,7 +230,6 @@ a.button {
 }
 
 input[type=date] {
-    padding-top: 2px;
     padding-left: 5px;
     padding-right: 5px;
     color:#3e4d60;
@@ -245,33 +260,44 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .search-box {
     background: white;
     border-radius: 5px;
-    margin-left: auto;
-    padding: 0;
+    /* margin-left: auto; */
+    /* padding: 0; */
     height: 35px;
-    display: flex;
-    float:right;
+    /* display: flex; */
+}
+
+@media only screen and (max-width: 992px)
+{
+    /* Squash sides of search bar in smaller screens or else it goes out wider than the option boxes. */
+    .search-box {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+
+    /* Vertical space between option boxes when squished into a small 2x2 layout in step 2 page. */
+    .col-6 {
+        margin-bottom: 15px;
+    }
 }
 
 .search-txt {
     border: none;
     outline: none;
     background: none;
-    width: 90%;
+    /* width: 90%; */
 }
 
 .search-btn {
-    margin-left: 8px;
-    height: 20px;
-    width: 20px;
     background:url("../img/search-icon.png");
-    background-size: 100% 100%;
-    margin-top: 8px;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-#step2-options >div div {
-    margin-top: 0;
+#step2-options > div div {
+    /* margin-top: 0;
     margin-bottom: 0;
-    padding-bottom: 0 !important;
+    padding-bottom: 0 !important; */
 }
 
 .variable-list {
@@ -342,12 +368,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 #map-controls .esri-sketch__button--selected {
     background-color: white !important;
-    color: grey!important;
+    color: rgb(87, 87, 87)!important;
 }
 
-#map-controls button[title="Transform"] {
+/* #map-controls button[title="Transform"] {
     pointer-events: none;
-}
+} */
 
 #map-controls button[title="Reshape"] {
     display: none;

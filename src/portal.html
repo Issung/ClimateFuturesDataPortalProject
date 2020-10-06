@@ -15,10 +15,10 @@
 
         <!-- Map Imports -->
             <!-- Import ArcGIS Map CSS -->
-            <link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css" />
+            <link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/themes/light/main.css" />
 
             <!-- Import ArcGIS 4.15 Library. -->
-            <script src="https://js.arcgis.com/4.15/"></script>
+            <script src="https://js.arcgis.com/4.16/"></script>
 
             <!-- Import Custom Map Setup Javascript. -->
             <script src="js/map.js"></script>
@@ -145,6 +145,7 @@
                     //var ensemble_members = $('#step2-options select option:selected').text();
 
                     $('#download-modal .loading-content').show();
+                    $('#download-modal .error-content').hide();
                     $('#download-modal .results-content').hide();
                     $('#download-modal').modal('show');
                     $(`#nav-${varTimeResolution}-tab`).click(); //Automatically select the tab that the user selected as time resolution.
@@ -191,13 +192,16 @@
                             emission: varEmission
                         }),
                         success: function (data,status) {
-                            //debugger;
-                            //alert(data + status);
                             updateDownloadResults(data);
                         },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            debugger;
-                            alert("Something Wrong");
+                    }).fail(function (data, textStatus, xhr) {
+                        //Hide loading and results and show error div.
+                        $('#download-modal .loading-content').hide();
+                        $('#download-modal .results-content').hide();
+                        $('#download-modal .error-content').show();
+                        $('#download-modal .error-content #error-details').text('');
+                        if (data.status != 0 || xhr.length != 0) {
+                            $('#download-modal .error-content #error-details').text(`Error code: ${data.status}, status: ${xhr}.`);
                         }
                     });
                 });
@@ -274,6 +278,7 @@
 
                 //Hide loading and show results.
                 $('#download-modal .loading-content').hide();
+                $('#download-modal .error-content').hide();
                 $('#download-modal .results-content').show();
             }
 
@@ -360,7 +365,7 @@
                 if (graphics._items.length == 0)
                 {
                     $('.summary-item#selected-area').addClass('error');
-                    $('.summary-item#selected-area').text('No area selected.');
+                    $('.summary-item#selected-area').text('No Area Selected!');
                     varMinLat = varMaxLat = varMinLong = varMaxLong = undefined;
                 }
                 else
@@ -398,7 +403,7 @@
 
                 if (isNaN(varStartDate)) {
                     $('.summary-item#start-date').addClass('error');
-                    $('.summary-item#start-date').text('Not Selected!');
+                    $('.summary-item#start-date').text('No Start Date Selected!');
                 }
                 else {
                     $('.summary-item#start-date').removeClass('error');
@@ -407,7 +412,7 @@
 
                 if (isNaN(varEndDate)) {
                     $('.summary-item#end-date').addClass('error');
-                    $('.summary-item#end-date').text('Not Selected!');
+                    $('.summary-item#end-date').text('No End Date Selected!');
                 }
                 else {
                     $('.summary-item#end-date').removeClass('error');
@@ -465,7 +470,7 @@
                 var selectedVariables = $('.variable:checked');
 
                 if (selectedVariables.length == 0) {
-                    $('.summary-item#selected-variables').append(`<li class="error">No Variables Selected!</li>`);
+                    $('.summary-item#selected-variables').append(`<p class="error" style="margin-left: -40px;">No Variables Selected!</p>`);
                 }
                 else {
                     selectedVariables.map(function(i, element) {
@@ -504,7 +509,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="download-modal-long-title">Download Data</h5>
+                        <h5 class="modal-title" id="download-modal-long-title">Search Data</h5>
                         <!-- <p style="color: red;">THIS IS A TEST DOWNLOAD, YOUR FILTERS WERE IGNORED.</p> -->
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -513,8 +518,14 @@
                     <div class="modal-body">
                         <div class="loading-content text-center">
                             <div class="loading-spinner"></div>
-                            <p class="loading-text">Loading... This can take a while.</p>
-                            <p class="loading-text">Searching for data within your filters.</p>
+                            <p class="loading-text">Loading... Please wait, this can take a while.</p>
+                            <p class="loading-text">Searching for files that contain data within your filters.</p>
+                        </div>
+                        <div class="error-content text-center">
+                            <i class="fas fa-exclamation-triangle fa-5x" style="margin-bottom: 15px; color: #d43e4c;"></i>
+                            <p class="error-text">Something went wrong.</p>
+                            <p class="error-text">Please <a target="_blank" href="https://climatefutures.org.au/contact/">contact us</a> for help with this error if it persists.</p>
+                            <p id="error-details"></p>
                         </div>
                         <div class="results-content">
                             <nav>
@@ -563,7 +574,6 @@
         </div>
 
         <div class="container-fluid content-stretcher">
-
             <!-- Header. Contains ClimateFutures logo and tagline. Hidden on sizes lower than lg. -->
             <div class="d-none d-lg-flex row content-stretcher-header justify-content-center" style="min-height: 106px">
                 <a class="col-lg-5 col-xl-4 d-flex justify-content-center" href="https://climatefutures.org.au/" target="_blank">
@@ -574,8 +584,12 @@
                         <p class="tagline" style="margin-bottom: 5px;">Climate Science for Australia's Future</p>
                     </div>
                     <div class="row d-flex justify-content-center">
-                        <img alt="INDRA Logo" src="img/indra-logo.png" style="max-width:28px; max-height:28px;">
-                        <p class="tagline" style="font-size: 16px; margin: 5px 0 0 7px;">Powered by INDRA</p>
+                        <a target="_blank" href="https://research.csiro.au/indra/">
+                            <img alt="INDRA Logo" src="img/indra-logo.png" style="max-width:28px; max-height:28px;">
+                        </a>
+                        <a target="_blank" href="https://research.csiro.au/indra/">
+                            <p class="tagline" style="font-size: 16px; margin: 5px 0 0 7px;">Powered by INDRA</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -585,64 +599,113 @@
                 <a href="#" class="col-sm-12 col-md-3 step switch-btn" id="step3"><span>Summary</span></a>
                 <a href="manual.html" target="_blank" class="col-sm-12 col-md-3 step"><span><i class="fas fa-book" style="margin-right: 10px"></i>Manual</span></a>
             </div>
+
             <div class="row" id="options-container">
-                <div class="row options" id="step1-options">
-                    <div class="col-2 box align-self-start" style="min-width: 225px;">
-                        <h4>Map Selection</h4>
-                        <div id="map-controls">
-                            
+                <div class="col">
+                    <div class="row options" id="step1-options">
+
+                        <!-- <div class="col-6 col-md-5 col-lg-2" style="max-width: 375px;">
+                            <div class="box">
+                                <h4>Map Selection</h4>
+                                
+                                <div class="row" style="margin-left: 0px !important; margin-right: 0px !important;">
+                                    <div id="map-controls" style="width: 100%;">
+                                
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="col-2 box align-self-start" style="min-width: 225px;">
+                            <div class="col-12">
+                                <h4>Map Selection</h4>
+                            </div>
+                            <div id="map-controls">
+                                
+                            </div>
+                        </div>
+                        <!-- <a href="#" class="col-4 col-md-3 col-lg-2  align-self-end side-button-right align-self-end orange">Import Shapefile</a> -->
+                    </div>
+                    <div class="row options" id="step2-options">
+                        <div class="col-6 col-lg-3">
+                            <div class="box">
+                                <h4>Time Period</h4>
+                                
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <label style="padding: 0;margin: 0">Start Date</label>
+                                        <input type="date" id="start-date">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label style="padding: 0;margin: 0">End Date</label>
+                                        <input type="date" id="end-date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-lg-2">
+                            <div class="box">
+                                <h4>Time Resolution</h4>
+                                
+                                <div class="row">
+                                    <div class="col-12">
+                                        <select id="time-resolution">
+                                            <option value="1hr">Hourly</option>
+                                            <option value="day">Daily</option>
+                                            <option value="mon">Monthly</option>
+                                            <option value="fx">Static</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-lg-2">
+                            <div class="box">
+                                <h4>Ensemble</h4>
+                                
+                                <div class="row">
+                                    <div class="col-12">
+                                        <select id="ensemble">
+                                            <option value="CSIRO-BOM-ACCESS1-0">CSIRO-BOM-ACCESS1-0</option>
+                                            <option value="CNRM-CERFACS-CNRM-CM5">CNRM-CERFACS-CNRM-CM5</option>
+                                            <option value="MOHC-HadGEM2-CC">MOHC-HadGEM2-CC</option>
+                                            <option value="MIROC-MIROC5">MIROC-MIROC5</option>
+                                            <option value="CSIRO-BOM-AGCD">CSIRO-BOM-AGCD</option>
+                                            <option value="NCC-NorESM1-M">NCC-NorESM1-M</option>
+                                            <option value="NOAA-GFDL-GFDL-ESM2M">NOAA-GFDL-GFDL-ESM2M</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-lg-2">
+                            <div class="box">
+                                <h4>Emission</h4>
+                                
+                                <div class="row">
+                                    <div class="col-12">
+                                        <select id="emission">
+                                            <option value="historical">Historical</option>
+                                            <option value="rcp85">RCP 8.5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-3 align-self-end">
+                            <div class="row search-box">
+                                <input class="col-11 search-txt" type="text" name="" placeholder="Search">
+                                <span class="col-1 search-btn" href="#"></span>
+                            </div>
                         </div>
                     </div>
-                    <!-- <a href="#" class="col-4 col-md-3 col-lg-2  align-self-end side-button-right align-self-end orange">Import Shapefile</a> -->
                 </div>
-                <div class="row options" id="step2-options">
-                    <div class="col-6 col-md-5 box align-self-start" style="max-width: 375px; padding-right: 0px;">
-                        <h4>Time Period</h4>
-                        <div class="row" style="padding: 0">
-                            <div class="col-6 flex-row">
-                                <label style="padding: 0;margin: 0">Start Date</label>
-                                <input type="date" id="start-date">
-                            </div>
-                            <div class="col-6 flex-row">
-                                <label style="padding: 0;margin: 0">End Date</label>
-                                <input type="date" id="end-date">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 col-md-2 box align-self-start">
-                        <h4>Time Resolution</h4>
-                        <select style="position: absolute; bottom: 15px; width: calc(100% - 40px);" id="time-resolution">
-                            <option value="1hr">Hourly</option>
-                            <option value="day">Daily</option>
-                            <option value="mon">Monthly</option>
-                            <option value="fx">Static</option>
-                        </select>
-                    </div>
-                    <div class="col-4 col-md-2 box align-self-start">
-                        <h4>Ensemble</h4>
-                        <select style="position: absolute; bottom: 15px; width: calc(100% - 40px);" id="ensemble">
-                            <option value="CSIRO-BOM-ACCESS1-0">CSIRO-BOM-ACCESS1-0</option>
-                            <option value="CNRM-CERFACS-CNRM-CM5">CNRM-CERFACS-CNRM-CM5</option>
-                            <option value="MOHC-HadGEM2-CC">MOHC-HadGEM2-CC</option>
-                            <option value="MIROC-MIROC5">MIROC-MIROC5</option>
-                            <option value="CSIRO-BOM-AGCD">CSIRO-BOM-AGCD</option>
-                            <option value="NCC-NorESM1-M">NCC-NorESM1-M</option>
-                            <option value="NOAA-GFDL-GFDL-ESM2M">NOAA-GFDL-GFDL-ESM2M</option>
-                        </select>
-                    </div>
-                    <div class="col-4 col-md-2 box align-self-start">
-                        <h4>Emission</h4>
-                        <select style="position: absolute; bottom: 15px; width: calc(100% - 40px);" id="emission">
-                            <option value="historical">Historical</option>
-                            <option value="rcp85">RCP 8.5</option>
-                        </select>
-                    </div>
-                    <div class="col-12 col-md-2 align-self-end search-box">
-                        <input class="search-txt" type="text" name="" placeholder="Search">
-                        <span class="search-btn" href="#"></span>
-                    </div>
-                </div>
-                <div class="row options" id="step3-options">
+
+                <!-- <div class="row options" id="step3-options"> -->
                     <!-- <div class="col-5 col-md-4 col-lg-3 box align-self-start">
                         <h4>Extraction Format</h4>
                         <select>
@@ -653,7 +716,7 @@
                         <h4>Estimated Subset Size</h4>
                         <h6 class="summary-item" id="extract-size">500Mb</h6>
                     </div> -->
-                </div>
+                <!-- </div> -->
             </div>
             <div class="row content-stretcher-content" id="content-container">
                 <div class="content" id="step1-content" style="position: relative;">
