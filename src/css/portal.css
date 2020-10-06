@@ -394,6 +394,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
 }
 
+#map-controls button.esri-icon-cursor {
+    display: none;
+}
+
 #map-controls .esri-sketch__button.esri-icon-undo {
     margin-right: 7px;
 }
