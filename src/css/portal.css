@@ -124,6 +124,8 @@
     -webkit-box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
     box-shadow: 5px 5px 13px -5px rgba(0,0,0,0.75);
+    position: relative;
+    overflow:hidden;
 }
 
 #options-container .options .box>.col-12 {
@@ -155,6 +157,13 @@
     border: 1px solid rgb(118, 118, 118);
     height: 35px;
     width:100%;
+}
+
+/* Float selects (drop down lists) to the bottom of option boxes and make them stretch to width too. */
+#options-container .options .box select {
+    width: calc(100% - 40px);
+    position: absolute;
+    bottom: 15px;
 }
 
 #content-container {
@@ -266,8 +275,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     /* display: flex; */
 }
 
-@media only screen and (max-width: 992px)
-{
+@media only screen and (min-width: 993px) {
+    /* Made spacing between last option box and search box consistent with spacing between all option boxes. */
+    .search-box {
+        margin-left: 0px !important;
+    }
+}
+
+@media only screen and (max-width: 992px) {
     /* Squash sides of search bar in smaller screens or else it goes out wider than the option boxes. */
     .search-box {
         margin-left: 0px !important;
