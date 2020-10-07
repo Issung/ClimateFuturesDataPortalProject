@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+    	<h1>Step 1 - Area </h1>
+    	<p>
+    		In this step, you will be able to select the area to search for geographical data. The area of choice can be selected by drawing a 	rectangular bounding box around the area of interest.
+    	</p>
+    	<p>
+    		This step contains a large interactive map with many tools to help you use it and select your desired area. 
+    	</p>
+    	<img alt="an overall image of the area step" src="img/area-overall.png" style="width:751px;height:431px">
+    	<p>Lets have a look at the different components and tools in this step you can use to select your desired extraction area.</p>
+    	<h3>The Toolbox</h3>
+    	<p>The toolbox is where you access controls related to selecting the desired area and modifying that selection.</p>
+    	<img alt="toolbox for the area selection" src="img/toolbox.png" style="width:503px;height:284px">
+    	<ul>
+    		<li><b>Transform</b>: switching between drawing bounding box and moving the selected box around.</li>
+    		<li><b>Draw Rectangle</b>: drawing the rectangular bounding box.</li>
+    		<li><b>Undo</b>: reversing to your previous action.</li>
+    		<li><b>Redo</b>: restoring any actions that were previously undone using an undo.</li>
+    		<li><b>Delete</b>: deleting current selected bounding box.</li>
+    		<li><b>Status box</b>: current number of bounding box.</li>
+    	</ul>
+    	<h3>Zoom Controls</h3>
+    	<p>The map can be zoomed in or out for convenience in selecting larger or smaller areas. </p>
+    	<p>The zoom controls can be accessed in the top left of the map below the toolbox.</p>
+    	<p>The plus (+) sign zooms the map inwards while the minus (-) sign zooms the map outwards.</p>
+    	<p>Zooming can also be quickly accessed by scrolling the mouse wheel up or down.</p>
+        <video width="75%" controls>
+            <source src="img/webm/zooming-buttons.webm" type="video/webm">
+            Your browser does not support <i>webm</i> video type
+        </video>         
+        <h3>Changing Map Style</h3>
+        <p>
+        	By default, the map has a hybrid style (a mix of satellite and labelling) but this can be changed to a topographical vector style if desired. 
+        </p>
+        <p>The button to toggle map styles can be found in the top right of the map and is used by simply clicking it once.</p>
+        <img alt="map toggling button" src="img/map-toggle.png">
+        <h3>Longitude / Latitude Display</h3>
+        <p>The latitude and longitude position of your mouse cursor is displayed in the bottom right of the map. These numbers update constantly as you move your mouse.</p>
+        <img alt="longitude and latitude display" src="img/longitude-and-latitude.png">
+        <h3>Drawing a Rectangle</h3>
+        <p>To select your area of choice using the interactive map, first click and drag the map to find your desired area, you may also zoom in our out to fit your desired area on the screen.</p>
+        <p>Once you have found it, select the <b>Draw Rectangle</b> tool and click and drag on the map from one point to another, a rectangle will appear from the position of your first click stretching to the position of your mouse cursor</p>   
+        <p>
+        	Once you finish drawing this new rectangle, this is the area of selection for your data! You can change it from this point on by:
+        	<ul>
+        		<li>
+        			Clicking and dragging the square handles on the sides and corners to <b>resize</b> it.
+        			<br>        			
+			        <video width="680" height="400" controls>
+			            <source src="img/webm/resize.webm" type="video/webm">
+			            Your browser does not support <i>webm</i> video type			        	    	
+			        </video>          			
+        		</li>
+        		<li>
+        			Clicking and dragging anywhere in the rectangle to <b>move</b> it.
+        			<br>
+			        <video width="75%" controls>
+			            <source src="img/webm/drag.webm" type="video/webm">
+			            Your browser does not support <i>webm</i> video type
+			        </video>          			
+        		</li>
+        		<li>
+        			Go backwards or forwards in time with your changes to the rectangle by using the <b>undo</b> and <b>redo</b> buttons in the toolbox.
+        			<br>        			
+			        <video width="75%" controls>
+			            <source src="img/webm/redo-undo.webm" type="video/webm">
+			            Your browser does not support <i>webm</i> video type
+			        </video>  				
+			    </li>        		
+        		<li>	
+        			Clicking it and pressing the delete button in the toolbox to <b>delete</b> it.
+        			<br>        			
+			        <video width="75%" controls>
+			            <source src="img/webm/delete.webm" type="video/webm">
+			            Your browser does not support <i>webm</i> video type
+			        </video>          		
+			    </li>
+        	</ul>
+        </p>
+        <p>Now that you have outlined your desired area for climate data extraction it is time to move onto the next step!</p>
+    </body>

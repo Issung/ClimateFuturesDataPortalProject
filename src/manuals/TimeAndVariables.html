@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+    	<h1>Step 2 - Time & Variables</h1>
+    	<p>
+    		Step 2 of the application focuses on setting more important filters for data extraction, most importantly <b>Time Period</b> and <b>Variables</b>, these filters are usually the most important to most users looking to search data, but other options are also included to help specify your search even more.
+    	</p>
+    	<p>Different filters are presented in separate orange boxes, and the long list of variables is displayed in the centre of the screen.</p>
+    	<img alt="time and variables overall layout" src="img/time-and-variables-overall.png" style="width:750px;height:430px">
+    	<h3>Time Period</h3>
+    	<p>With this filter you must specify a period of time to search for climate data within. </p>
+    	<p>To input dates you may click on the numbers and input them with your keyboard, or click the small calendar icon to open an interactive calendar and select a date that way.</p>
+    	<p>When an end date is selected the start date will automatically be set to it too in case you set a far back date then you will not need to scroll back once again.</p>
+    	<p>You must specify a time period in order to search for data and the start and end dates must be in the correct order (start date comes before end date).</p>
+    	<img alt="time period selection" src="img/time-period.png">
+    	<h3>Time Resolution</h3>
+    	<p>Time resolution determines the frequency of recorded climate data, this is how common climate data was recorded, ranging from hourly to monthly.</p>
+    	<p>The desired time resolution can be selected from the drop-down list.</p>
+    	<p>The Time Resolution option consists of 3 options: Daily, Hourly and Monthly.</p>
+    	<p><b>Static</b> can be used for data that does not change, of which there is some of in the database, such as Surface Altitude.</p>
+    	<p>For example, a climate data file over a time period of 2 30-day months, with a time resolution of 1 hour will contain 2 * 30 * 24 = 1440 data records.</p>
+    	<p><b>Note:</b> when performing the final search for data you will be presented with data of all time resolutions, but will be shown results from your choice in this step automatically, but other results can still be accessed.</p>
+    	<img alt="time resolution selection" src="img/time-resolution.png">
+    	<h3>Ensemble</h3>
+    	<p>Ensembles are complex climate data models that climate data is based around, of which there are 7 choices.</p>
+        <p>These ensemble members include the following:       
+            <ul>
+                <li>
+                    CSIRO-BOM-ACCESS1-0: includes the following products 
+                    (See more information at <a href="http://www.cawcr.gov.au" target="_blank"> http://www.cawcr.gov.au</a>):
+                     <ul>
+                        <li>piControl</li>
+                        <li>amip</li>
+                        <li>historical</li>
+                        <li>historicalExt</li>
+                        <li>rcp45</li>
+                        <li>rcp85</li>
+                        <li>abrupt4xCO2</li>
+                        <li>1pctCO2</li>
+                    </ul>                    
+                </li>
+              
+                <li>
+                    MOHC-HadGEM2-CC:  (MOHC) Met Office Hadley Centre HadGEM2-CC model output for the mid-Holocene (midHolocene) experiment. These data cover the following realms (See more information at <a href="https://catalogue.ceda.ac.uk/uuid/34803cb447ba45fe8ed9cf2bb75e896c" target="_blank"> https://catalogue.ceda.ac.uk/</a>):
+                    <ul>
+                        <li>aerosol</li>
+                        <li>atmos</li>
+                        <li>land</li>
+                        <li>landIce</li>
+                        <li>ocean</li>
+                        <li>ocnBgchem </li>
+                        <li>seaIce</li>
+                    </ul>
+                </li>  
+
+                <li>
+                    CNRM-CERFACS-CNRM-CM5: an Earth system model designed to run climate simulations.
+                    It consists of several existing models designed independently and coupled through the <a href="http://pantar.cerfacs.fr/3-26568-OASIS.php" target="_blank">OASIS</a> software developed at CERFACS  (See more information at <a href="http://www.umr-cnrm.fr/spip.php?article126&lang=en" target="_blank"> http://www.umr-cnrm.fr/</a>).
+                </li>
+
+                <li>
+                    CSIRO-BOM-AGCD: Australian Gridded Climate Data by Commonwealth Scientific and Industrial Research Organisation and Bureau of Meteorology (See more information at <a href="http://www.bom.gov.au/climate/austmaps/metadata-daily-rainfall.shtml" target="_blank"> http://www.bom.gov.au//</a>)
+                </li>
+
+                <li>
+                    NCC-NorESM1-M: Norwegian Climate Centre (NCC) NorESM1-M model output collection. Centre for Environmental Data Analysis (See more information at <a href="https://catalogue.ceda.ac.uk/uuid/753310df96fa4d9ca74dd33b19bdf330" target="_blank">https://catalogue.ceda.ac.uk/</a>).
+                </li>
+                
+                <li>NOAA-GFDL-GFDL-ESM2M</li>
+
+                <li>MROC-MIROC5</li>
+            </ul>
+        </p>
+        <p>These options may be simply selected by clicking the drop down list and clicking the desired option.</p>
+        <img alt="ensemble selection" src="img/ensemble.png">
+        <h3>Emission</h3>
+        <p>
+        	Emission options allow for selection of two options:
+        	<ul>
+        		<li><b>Historical</b>: True records of climate from the past, or</li>
+        		<li>
+        			<b>RCP 8.5</b> – Forecasted records from the Representative Concentration Pathway 8.5 greenhouse gas concentration trajectory.
+        		</li>
+        	</ul>
+        </p>	
+        <p>These options may be simply selected by clicking the drop-down list and clicking the desired option.</p>
+        <img alt="emission selection" src="img/emission.png">
+        <h3>Variables Area</h3>
+        <p>There are 59 variables to choose from for searching the climate data. </p>
+        <p>The variable list is displayed in the main section of the interface and each variable represents a kind of climate data. </p>
+        <p>It can be selected by clicking the checkbox or the name next to the checkbox with the left mouse button. </p>
+        <p>More than one variable can be selected (search time will increase with the number of variables selected) </p>
+        <p>At least one variable must be selected to begin the search.</p>
+        <img alt="variable list" src="img/variable-list.png" style="width:70%">
+        <h3>Variable Search</h3>
+        <p>As there are many variables and you likely only want a handful or less, you may quickly search the list of variables for the ones you desire. </p>
+        <p>Left click on the variable search box to focus it and begin typing the name of the variable you want to find. The variable list will display all variables that match part of the text you had typed.</p>
+        <img alt="search functionality for variables" src="img/search-function.png">
+    </body>
